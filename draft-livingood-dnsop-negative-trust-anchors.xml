@@ -497,20 +497,20 @@
       <figure anchor="Negative-Trust-Anchor-Diagram"
               title="Negative Trust Anchor Diagram">
         <artwork><![CDATA[
-      Root (.)              <======
-          |                       ||
-          |                       ||<======>+----+----+     DNSSEC
-          |                       ||        |Recursive|    Validation
-      TLD (com)             <=====||        |Resolver | <==============>
-          |                        +<------>+---------+
-          |                        |                       DNS NTA
-          |                        |                 (zone1.example.com)
-  SUB TLD (example.com)     <------|                    <-------------->
-          |                        |
-          |                        |
-          |                        |
-          (zone1.example.com <-----|
-			        	]]></artwork>
+     Root (.)              <======
+         |                       ||
+         |                       ||<======>+----+----+    DNSSEC
+         |                       ||        |Recursive|   Validation
+     TLD (com)             <=====||        |Resolver |<============>
+         |                        +<------>+---------+
+         |                        |                     DNS NTA
+         |                        |               (zone1.example.com)
+ SUB TLD (example.com)     <------|                 <-------------->
+         |                        |
+         |                        |
+         |                        |
+         (zone1.example.com <-----|
+]]></artwork>
       </figure>
     </section>
 
@@ -823,6 +823,48 @@
         <seriesInfo name="Comcast" value=""/>
       </reference>
     </references>
+
+    <section title="Configuration Examples">
+      <t>The section contains example configurations to achive Negative Trust
+      Anchor funcationality for the zone foo.example.com.</t>
+
+      <t>[ Editor (WK) note: Nameserver vendors are encouraged to provide
+      examples for their software. Additionally, I *think* the below is
+      correct, but more testing is encouraged... ]</t>
+
+      <t>Please note: These are simply examples - nameserver operators are
+      expected to test and understand the implications of these
+      operations.</t>
+
+      <section title="NLNet Labs Unbound">
+        <t>Unbound lets us simply disable validation eching for a specific
+        zone. See:
+        &lt;http://unbound.net/documentation/howto_turnoff_dnssec.html&gt; [
+        TODO(WK): Make this a "real" reference ]<figure>
+            <artwork><![CDATA[server:
+        domain-insecure: "foo.example.com"
+]]></artwork>
+          </figure></t>
+      </section>
+
+      <section title="ISC BIND">
+        <t>[TODO (WK): It this really the best way to do it? Ick.]</t>
+
+        <t>We can achive this functionality by disabling all DNSSEC algorithms
+        for a zone. The operator can see which algorithms the zone is using,
+        or simply disable all supported algorithms.</t>
+
+        <t>This gets placed in the "global options" section of the config
+        file.</t>
+
+        <t><figure>
+            <artwork><![CDATA[disable-algorithms "foo.example.com." {"RSAMD5", "RSA", "DH",
+  "DSA", "NSEC3DSA", "ECC", "RSASHA1", "NSEC3RSASHA1",
+  "RSASHA256", "RSASHA512", "ECCGOST", "ECDSAP256SHA256",
+  "ECDSAP384SHA384"; };]]></artwork>
+          </figure></t>
+      </section>
+    </section>
 
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>

@@ -76,17 +76,17 @@ Copyright Notice
 
 Table of Contents
 
-   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-   2.  Definition of a Negative Trust Anchor . . . . . . . . . . . .   3
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   3
+   2.  Definition of a Negative Trust Anchor . . . . . . . . . . . .   4
    3.  Limited Time and Scope of Use . . . . . . . . . . . . . . . .   4
-   4.  Domain Validation Failures  . . . . . . . . . . . . . . . . .   4
+   4.  Domain Validation Failures  . . . . . . . . . . . . . . . . .   5
    5.  End User Reaction . . . . . . . . . . . . . . . . . . . . . .   5
    6.  Switching to a Non-Validating Resolver is Not Recommended . .   6
    7.  Responsibility for Failures . . . . . . . . . . . . . . . . .   6
    8.  Use of a Negative Trust Anchor  . . . . . . . . . . . . . . .   7
-   9.  Managing Negative Trust Anchors . . . . . . . . . . . . . . .   8
+   9.  Managing Negative Trust Anchors . . . . . . . . . . . . . . .   9
    10. Removal of a Negative Trust Anchor  . . . . . . . . . . . . .   9
-   11. Comparison to Other DNS Misconfigurations . . . . . . . . . .   9
+   11. Comparison to Other DNS Misconfigurations . . . . . . . . . .  10
    12. Intentionally Broken Domains  . . . . . . . . . . . . . . . .  10
    13. Other Considerations  . . . . . . . . . . . . . . . . . . . .  10
      13.1.  Security Considerations  . . . . . . . . . . . . . . . .  10
@@ -96,16 +96,16 @@ Table of Contents
    15. References  . . . . . . . . . . . . . . . . . . . . . . . . .  12
      15.1.  Normative References . . . . . . . . . . . . . . . . . .  12
      15.2.  Informative References . . . . . . . . . . . . . . . . .  13
-   Appendix A.  Document Change Log  . . . . . . . . . . . . . . . .  13
-   Appendix B.  Open Issues  . . . . . . . . . . . . . . . . . . . .  15
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  17
+   Appendix A.  Configuration Examples . . . . . . . . . . . . . . .  14
+     A.1.  NLNet Labs Unbound  . . . . . . . . . . . . . . . . . . .  14
+     A.2.  ISC BIND  . . . . . . . . . . . . . . . . . . . . . . . .  14
+   Appendix B.  Document Change Log  . . . . . . . . . . . . . . . .  14
+   Appendix C.  Open Issues  . . . . . . . . . . . . . . . . . . . .  16
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
 
-1.  Introduction
 
-   The Domain Name System (DNS), DNS Security Extensions (DNSSEC), and
-   related operational practices are defined extensively [RFC1034]
-   [RFC1035] [RFC4033] [RFC4034] [RFC4035] [RFC4398] [RFC4509] [RFC6781]
-   [RFC5155].
+
+
 
 
 
@@ -114,6 +114,13 @@ Ebersman, et al.         Expires March 29, 2015                 [Page 2]
 
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
+
+1.  Introduction
+
+   The Domain Name System (DNS), DNS Security Extensions (DNSSEC), and
+   related operational practices are defined extensively [RFC1034]
+   [RFC1035] [RFC4033] [RFC4034] [RFC4035] [RFC4398] [RFC4509] [RFC6781]
+   [RFC5155].
 
    This document discusses Trust Anchors for DNSSEC and defines a
    Negative Trust Anchor, which is potentially useful during the
@@ -155,14 +162,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
    A Negative Trust Anchor should be considered a transitional and
    temporary tactic which is not particularly scalable and should not be
    used in the long-term.  Over time, however, the use of Negative Trust
-   Anchors will become less necessary as DNSSEC-related domain
-   administration becomes more resilient.
 
-2.  Definition of a Negative Trust Anchor
-
-   Trust Anchors are defined in [RFC5914].  A trust anchor should be
-   used by a validating caching resolver as a starting point for
-   building the authentication chain for a signed DNS response.  The
 
 
 
@@ -171,6 +171,14 @@ Ebersman, et al.         Expires March 29, 2015                 [Page 3]
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
+   Anchors will become less necessary as DNSSEC-related domain
+   administration becomes more resilient.
+
+2.  Definition of a Negative Trust Anchor
+
+   Trust Anchors are defined in [RFC5914].  A trust anchor should be
+   used by a validating caching resolver as a starting point for
+   building the authentication chain for a signed DNS response.  The
    inverse of this is a Negative Trust Anchor, which creates a stopping
    point for a caching resolver to end validation of the authentication
    chain.  This Negative Trust Anchor can potentially be placed at any
@@ -212,14 +220,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
        be automatic in any way, and must involve investigation by
        technical personnel trained in the operation of DNS servers.
 
-4.  Domain Validation Failures
-
-   A domain name can fail validation for two general reasons: a
-   legitimate security failure such as due to an attack or compromise of
-   some sort, or as a result of misconfiguration on the part of an
-   domain administrator.  As domains transition to DNSSEC the most
-   likely reason for a validation failure will be misconfiguration.
-
 
 
 Ebersman, et al.         Expires March 29, 2015                 [Page 4]
@@ -227,6 +227,13 @@ Ebersman, et al.         Expires March 29, 2015                 [Page 4]
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
+4.  Domain Validation Failures
+
+   A domain name can fail validation for two general reasons: a
+   legitimate security failure such as due to an attack or compromise of
+   some sort, or as a result of misconfiguration on the part of an
+   domain administrator.  As domains transition to DNSSEC the most
+   likely reason for a validation failure will be misconfiguration.
    Thus, domain administrators should be sure to read [RFC6781] in full.
    They should also pay special attention to Section 4.2, pertaining to
    key rollovers, which appears to be the cause of many recent
@@ -268,13 +275,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
    failure to reach a domain due to DNSSEC-related misconfiguration .
    They may (incorrectly) assume that their ISP is purposely blocking
    access to the domain or as a performance failure on the part of their
-   ISP (especially of the ISP's DNS servers).  End users may feel less
-   satisfied with their ISP's service, which may make them more likely
-   to switch to a competing ISP.  They may also contact their ISP to
-   complain, which of course will incur cost for their ISP.  In
-   addition, they may use online tools and sites to complain of this
-   problem, such as via a blog, web forum, or social media site, which
-
 
 
 
@@ -283,6 +283,12 @@ Ebersman, et al.         Expires March 29, 2015                 [Page 5]
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
+   ISP (especially of the ISP's DNS servers).  End users may feel less
+   satisfied with their ISP's service, which may make them more likely
+   to switch to a competing ISP.  They may also contact their ISP to
+   complain, which of course will incur cost for their ISP.  In
+   addition, they may use online tools and sites to complain of this
+   problem, such as via a blog, web forum, or social media site, which
    may lead to dissatisfaction on the part of other end users or general
    criticism of an ISP or operator of a DNS recursive resolver.
 
@@ -325,12 +331,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
    includes complete responsibility for the correctness of those
    resource records, the proper functioning of their DNS authoritative
    servers, and the correctness of DNS records linking their domain to a
-   top-level domain (TLD) or other higher level domain.  Even in cases
-   where some error may be introduced by a third party, whether that is
-   due to an authoritative server software vendor, software tools
-   vendor, domain name registrar, or other organization, these are all
-   parties that the domain administrator has selected and is responsible
-   for managing successfully.
 
 
 
@@ -338,6 +338,13 @@ Ebersman, et al.         Expires March 29, 2015                 [Page 6]
 
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
+
+   top-level domain (TLD) or other higher level domain.  Even in cases
+   where some error may be introduced by a third party, whether that is
+   due to an authoritative server software vendor, software tools
+   vendor, domain name registrar, or other organization, these are all
+   parties that the domain administrator has selected and is responsible
+   for managing successfully.
 
    There are some cases in which the domain administrator is not the
    same as the domain owner.  In those cases, a domain owner has
@@ -379,13 +386,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
    and must involve investigation by technical personnel trained in the
    operation of DNS servers.
 
-   Technical personnel should also confirm that the domain is not
-   intentionally broken, such as for testing purposes as noted in
-   Section 12.  Such an investigation must confirm that a failure is due
-   to misconfiguration, as a similar breakage could have occurred if an
-   attacker gained access to a domain's authoritative servers and
-   modified those records or had the domain pointed to their own rogue
-   authoritative servers.  In addition, personnel should make a
 
 
 
@@ -395,6 +395,13 @@ Ebersman, et al.         Expires March 29, 2015                 [Page 7]
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
+   Technical personnel should also confirm that the domain is not
+   intentionally broken, such as for testing purposes as noted in
+   Section 12.  Such an investigation must confirm that a failure is due
+   to misconfiguration, as a similar breakage could have occurred if an
+   attacker gained access to a domain's authoritative servers and
+   modified those records or had the domain pointed to their own rogue
+   authoritative servers.  In addition, personnel should make a
    reasonable attempt to contact a domain for which a Negative Trust
    Anchor may be used, and preferably prior to implementing it.
 
@@ -420,29 +427,22 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
    example.com, and validation would still be performed on .com, and the
    root (".")
 
-      Root (.)              <======
-          |                       ||
-          |                       ||<======>+----+----+     DNSSEC
-          |                       ||        |Recursive|    Validation
-      TLD (com)             <=====||        |Resolver | <==============>
-          |                        +<------>+---------+
-          |                        |                       DNS NTA
-          |                        |                 (zone1.example.com)
-  SUB TLD (example.com)     <------|                    <-------------->
-          |                        |
-          |                        |
-          |                        |
-          (zone1.example.com <-----|
+        Root (.)              <======
+            |                       ||
+            |                       ||<======>+----+----+    DNSSEC
+            |                       ||        |Recursive|   Validation
+        TLD (com)             <=====||        |Resolver |<============>
+            |                        +<------>+---------+
+            |                        |                     DNS NTA
+            |                        |               (zone1.example.com)
+    SUB TLD (example.com)     <------|                 <-------------->
+            |                        |
+            |                        |
+            |                        |
+            (zone1.example.com <-----|
 
                   Figure 1: Negative Trust Anchor Diagram
 
-9.  Managing Negative Trust Anchors
-
-   This tool is unlikely to be and probably should not be used over the
-   long-term since DNSSEC-related domain administration practices will
-   naturally improve over time.  In addition, however, continued and
-   frequent use of Negative Trust Anchors is not scalable since it
-   requires investigation by technical personnel and may involve manual
 
 
 
@@ -451,6 +451,13 @@ Ebersman, et al.         Expires March 29, 2015                 [Page 8]
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
+9.  Managing Negative Trust Anchors
+
+   This tool is unlikely to be and probably should not be used over the
+   long-term since DNSSEC-related domain administration practices will
+   naturally improve over time.  In addition, however, continued and
+   frequent use of Negative Trust Anchors is not scalable since it
+   requires investigation by technical personnel and may involve manual
    processes, resulting in increased operational overhead (and therefore
    cost).
 
@@ -490,6 +497,16 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
    automatic, though it may also be achieved via other systems or
    supporting processes.
 
+
+
+
+
+
+Ebersman, et al.         Expires March 29, 2015                 [Page 9]
+
+Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
+
+
 11.  Comparison to Other DNS Misconfigurations
 
    As noted in Section 7 domain administrators are ultimately
@@ -499,14 +516,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
    resource records of domains for which they are not authoritative.
    Expecting non-authoritative entities to protect domain administrators
    from any misconfiguration of resource records is therefore
-
-
-
-Ebersman, et al.         Expires March 29, 2015                 [Page 9]
-
-Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
-
-
    unrealistic and unreasonable, and in the long-term is harmful to the
    delegated design of the DNS and could lead to extensive operational
    instability and/or variation.
@@ -546,15 +555,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
    made to contact and inform the domain administrator prior to putting
    the NTA in place.
 
-   End users of a DNS recursive resolver or other people may wonder why
-   a domain that fails DNSSEC validation resolves with a supposedly
-   validating resolver.  As a result, implementors should consider
-   transparently disclosing those Negative Trust Anchors which are
-   currently in place or were in place in the past, such as on a website
-   [Disclosure-Example].  This is particularly important since there is
-   currently no special DNS query response code that could indicate to
-   end users or applications that a Negative Trust Anchor is in place.
-
 
 
 
@@ -563,6 +563,14 @@ Ebersman, et al.         Expires March 29, 2015                [Page 10]
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
+   End users of a DNS recursive resolver or other people may wonder why
+   a domain that fails DNSSEC validation resolves with a supposedly
+   validating resolver.  As a result, implementors should consider
+   transparently disclosing those Negative Trust Anchors which are
+   currently in place or were in place in the past, such as on a website
+   [Disclosure-Example].  This is particularly important since there is
+   currently no special DNS query response code that could indicate to
+   end users or applications that a Negative Trust Anchor is in place.
    Such disclosures should optimally include both the data and time that
    the Negative Trust Anchor was put in place and when it was removed.
 
@@ -604,6 +612,13 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
    - Peter Hagopian
 
+
+
+Ebersman, et al.         Expires March 29, 2015                [Page 11]
+
+Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
+
+
    - Wes Hardaker
 
    - Paul Hoffman
@@ -611,13 +626,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
    - Shane Kerr
 
    - Murray Kucherawy
-
-
-
-Ebersman, et al.         Expires March 29, 2015                [Page 11]
-
-Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
-
 
    - Warren Kumari
 
@@ -657,6 +665,16 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
               Rose, "Resource Records for the DNS Security Extensions",
               RFC 4034, March 2005.
 
+
+
+
+
+
+Ebersman, et al.         Expires March 29, 2015                [Page 12]
+
+Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
+
+
    [RFC4035]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "Protocol Modifications for the DNS Security
               Extensions", RFC 4035, March 2005.
@@ -666,14 +684,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
    [RFC4509]  Hardaker, W., "Use of SHA-256 in DNSSEC Delegation Signer
               (DS) Resource Records (RRs)", RFC 4509, May 2006.
-
-
-
-
-Ebersman, et al.         Expires March 29, 2015                [Page 12]
-
-Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
-
 
    [RFC5155]  Laurie, B., Sisson, G., Arends, R., and D. Blacka, "DNS
               Security (DNSSEC) Hashed Authenticated Denial of
@@ -712,12 +722,57 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
               2011, <http://conferences.npl.co.uk/satin/presentations/
               satin2011slides-Weaver.pdf>.
 
+
+
+
+
+Ebersman, et al.         Expires March 29, 2015                [Page 13]
+
+Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
+
+
    [Unbound-Configuration]
               Wijngaards, W., "Unbound: How to Turn Off DNSSEC", June
               2010, <http://unbound.net/documentation/
               howto_turnoff_dnssec.html>.
 
-Appendix A.  Document Change Log
+Appendix A.  Configuration Examples
+
+   The section contains example configurations to achive Negative Trust
+   Anchor funcationality for the zone foo.example.com.
+
+   [ Editor (WK) note: Nameserver vendors are encouraged to provide
+   examples for their software.  Additionally, I *think* the below is
+   correct, but more testing is encouraged... ]
+
+   Please note: These are simply examples - nameserver operators are
+   expected to test and understand the implications of these operations.
+
+A.1.  NLNet Labs Unbound
+
+   Unbound lets us simply disable validation eching for a specific zone.
+   See: <http://unbound.net/documentation/howto_turnoff_dnssec.html> [
+   TODO(WK): Make this a "real" reference ]
+
+   server:
+           domain-insecure: "foo.example.com"
+
+A.2.  ISC BIND
+
+   [TODO (WK): It this really the best way to do it?  Ick.]
+
+   We can achive this functionality by disabling all DNSSEC algorithms
+   for a zone.  The operator can see which algorithms the zone is using,
+   or simply disable all supported algorithms.
+
+   This gets placed in the "global options" section of the config file.
+
+   disable-algorithms "foo.example.com." {"RSAMD5", "RSA", "DH",
+     "DSA", "NSEC3DSA", "ECC", "RSASHA1", "NSEC3RSASHA1",
+     "RSASHA256", "RSASHA512", "ECCGOST", "ECDSAP256SHA256",
+     "ECDSAP384SHA384"; };
+
+Appendix B.  Document Change Log
 
    [RFC Editor: This section is to be removed before publication]
 
@@ -726,7 +781,8 @@ Appendix A.  Document Change Log
 
 
 
-Ebersman, et al.         Expires March 29, 2015                [Page 13]
+
+Ebersman, et al.         Expires March 29, 2015                [Page 14]
 
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
@@ -782,12 +838,12 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
 
-Ebersman, et al.         Expires March 29, 2015                [Page 14]
+Ebersman, et al.         Expires March 29, 2015                [Page 15]
 
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
-Appendix B.  Open Issues
+Appendix C.  Open Issues
 
    [RFC Editor: This section is to be removed before publication]
 
@@ -838,7 +894,7 @@ Appendix B.  Open Issues
 
 
 
-Ebersman, et al.         Expires March 29, 2015                [Page 15]
+Ebersman, et al.         Expires March 29, 2015                [Page 16]
 
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
@@ -894,7 +950,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
 
-Ebersman, et al.         Expires March 29, 2015                [Page 16]
+Ebersman, et al.         Expires March 29, 2015                [Page 17]
 
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
@@ -950,7 +1006,7 @@ Authors' Addresses
 
 
 
-Ebersman, et al.         Expires March 29, 2015                [Page 17]
+Ebersman, et al.         Expires March 29, 2015                [Page 18]
 
 Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
@@ -1006,5 +1062,5 @@ Internet-Draft        DNSSEC Negative Trust Anchors       September 2014
 
 
 
-Ebersman, et al.         Expires March 29, 2015                [Page 18]
+Ebersman, et al.         Expires March 29, 2015                [Page 19]
 ```
