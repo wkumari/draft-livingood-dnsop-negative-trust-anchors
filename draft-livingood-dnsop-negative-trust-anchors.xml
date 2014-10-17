@@ -67,9 +67,9 @@
           <country>US</country>
         </postal>
 
-        <email>paul_ebersman@cable.comcast.com</email>
+        <email>ebersman-ietf@dragon.net</email>
 
-        <uri>http://www.comcast.com</uri>
+        <uri/>
       </address>
 
       <!-- author role='editor' is an optional value here -->
@@ -205,7 +205,7 @@
 
       <t>[ Editor note: This document was originally
       draft-livingood-negative-trust-anchors-07 - renamved at the request of
-      the DNSOP chairs ] </t>
+      the DNSOP chairs ]</t>
 
       <t/>
     </abstract>
@@ -275,9 +275,11 @@
       should be used by a validating caching resolver as a starting point for
       building the authentication chain for a signed DNS response. The inverse
       of this is a Negative Trust Anchor, which creates a stopping point for a
-      caching resolver to end validation of the authentication chain. This
-      Negative Trust Anchor can potentially be placed at any level within the
-      chain of trust and would stop validation at that point in the chain.</t>
+      caching resolver to end validation of the authentication chain. Instead,
+      the resolver sends the response as if the zone is unsigned and does not
+      set the AD bit. This Negative Trust Anchor can potentially be placed at
+      any level within the chain of trust and would stop validation at that
+      point in the chain.</t>
     </section>
 
     <section anchor="Limited-Time-and-Scope-of-Use"
@@ -293,9 +295,7 @@
 
           <t>During this transition phase when Negative Trust Anchors may be
           useful, the use of a particular Negative Trust Anchor should be
-          temporary and in most cases limited to no more than 1 day. Thus, the
-          use of an individual Negative Trust Anchor should be strictly time
-          limited and very short in duration.</t>
+          temporary.</t>
 
           <t>So that the use of Negative Trust Anchors remains temporary and
           useful only during a transition to widespread DNSSEC deployment, the
@@ -543,23 +543,21 @@
 
     <section anchor="Removal-of-a-Negative-Trust-Anchor"
              title="Removal of a Negative Trust Anchor" toc="include">
-      <t>As explored in <xref target="Security-Considerations"/>, if a
-      Negative Trust Anchor is still in place after the point in time when the
-      DNS misconfiguration that caused validation to break has been fixed,
-      this could be problematic. It is therefore recommended that implementors
-      should periodically, or even continuously, attempt to validate the
-      domain in question, for the period of time that the Negative Trust
-      Anchor is in place, until such validation is again successful.
-      (Obviously a Negative Trust Anchor could be removed prior to validation
-      succeeding again, alleviating an implementor of the need to continuing
-      to test validation separate from their normal operations.) Before
-      removing the Negative Trust Anchor, all authoritive resolvers should be
-      checked (due to AnyCast, this may not be completely possible).</t>
+      <t>As explored in <xref target="Security-Considerations"/>, using an NTA
+      once the zone correctly validates can have security considerations. It
+      is therefore recommended that implementors should periodically attempt
+      to validate the domain in question, for the period of time that the
+      Negative Trust Anchor is in place, until such validation is again
+      successful. (Obviously a Negative Trust Anchor could be removed prior to
+      validation succeeding again, alleviating an implementor of the need to
+      continuing to test validation separate from their normal operations.)
+      Before removing the Negative Trust Anchor, all authoritive resolvers
+      listed in the zone should be checked. Due to AnyCast or load balancers,
+      this may not be possible.</t>
 
-      <t>Once validation is again successful, a Negative Trust Anchor should
-      be removed as soon as is reasonably possible. Optimally this is
-      automatic, though it may also be achieved via other systems or
-      supporting processes.</t>
+      <t>Once all testing succeeds, a Negative Trust Anchor should be removed
+      as soon as is reasonably possible. Optimally this is automatic, though
+      it may also be achieved via other systems or supporting processes.</t>
     </section>
 
     <section anchor="Comparison-to-Other-DNS-Misconfigurations"
@@ -609,7 +607,7 @@
         Anchor may be put in place by DNS recursive resolver operators without
         the knowledge of the authoritative domain administrator for a given
         domain name. However, attempts SHOULD be made to contact and inform
-        the domain administrator prior to putting the NTA in place. </t>
+        the domain administrator prior to putting the NTA in place.</t>
 
         <t>End users of a DNS recursive resolver or other people may wonder
         why a domain that fails DNSSEC validation resolves with a supposedly
