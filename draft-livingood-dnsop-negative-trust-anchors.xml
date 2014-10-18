@@ -226,19 +226,15 @@
       target="RFC4509"></xref> <xref target="RFC6781"></xref> <xref
       target="RFC5155"></xref>.</t>
 
-      <t>This document discusses Trust Anchors for DNSSEC and defines a
-      Negative Trust Anchor, which is potentially useful during the transition
-      to ubiquitous DNSSEC deployment. These are configured locally on a
-      particular instance of a validating DNS recursive resolver and can
-      shield end users of such a resolver from the DNSSEC-related
-      authoritative name server operational errors that appear to be somewhat
-      typical during the transition to ubiquitous DNSSEC deployment. Negative
-      Trust Anchors are intended to be temporary, and should not be
+      <t>This document defines a Negative Trust Anchor, which can be used
+      during the transition to ubiquitous DNSSEC deployment. These are
+      configured locally on a validating DNS recursive resolver to shield end
+      users from DNSSEC-related authoritative name server operational errors.
+      Negative Trust Anchors are intended to be temporary, and should not be
       distributed by IANA or any other organization outside of the
       administrative boundary of the organization locally implementing a
       Negative Trust Anchor. Finally, Negative Trust Anchors pertain only to
-      DNSSEC and not to Public Key Infrastructures (PKI) such ad X.509.
-      [REFERENCE NECESSARY?]</t>
+      DNSSEC and not to Public Key Infrastructures (PKI) such ad X.509.</t>
 
       <t>DNSSEC has now entered widespread deployment. However, domain signing
       tools and processes are not yet as mature and reliable as is the case
@@ -248,9 +244,12 @@
       DNSSEC-related resource records. This mismanagement triggers DNSSEC
       validation failures, and then causes large numbers of end users to be
       unable to reach a domain. Many end users tend to interpret this as a
-      failure of their DNS servers, and may switch to a non-validating
-      resolver or contact their ISP to complain, rather than seeing this as a
-      failure on the part of the domain they wanted to reach.</t>
+      failure of their ISP or resolver operator, and may switch to a
+      non-validating resolver or contact their ISP to complain, rather than
+      seeing this as a failure on the part of the domain they wanted to reach.
+      Without the techniques in this document, this pressure may cause the
+      resolver operator to disable (or simply not deploy) DNSSEC
+      validation.</t>
 
       <t>In the short-term, one potential way for DNS Operators to address
       this is to use a Negative Trust Anchor to temporarily disable DNSSEC
