@@ -69,7 +69,7 @@
 
         <email>ebersman-ietf@dragon.net</email>
 
-        <uri></uri>
+        <uri/>
       </address>
 
       <!-- author role='editor' is an optional value here -->
@@ -163,7 +163,7 @@
       <!-- author role='editor' is an optional value here -->
     </author>
 
-    <date day="25" month="September" year="2014" />
+    <date day="25" month="September" year="2014"/>
 
     <!-- META-DATA DECLARATIONS -->
 
@@ -200,13 +200,13 @@
       deployment. However, domain signing tools and processes are not yet as
       mature and reliable as those for non-DNSSEC-related domain
       administration tools and processes. Negative Trust Anchors (described in
-      this document) can be used to mitigate signing failures.</t>
+      this document) can be used to mitigate DNSSEC validation failures.</t>
 
       <t>[ Editor note: This document was originally
       draft-livingood-negative-trust-anchors-07 - renamved at the request of
       the DNSOP chairs ]</t>
 
-      <t></t>
+      <t/>
     </abstract>
 
     <!-- END META-DATA DECLARATIONS -->
@@ -220,11 +220,10 @@
     <section anchor="intro" title="Introduction" toc="include">
       <t>The Domain Name System (DNS), DNS Security Extensions (DNSSEC), and
       related operational practices are defined extensively <xref
-      target="RFC1034"></xref> <xref target="RFC1035"></xref> <xref
-      target="RFC4033"></xref> <xref target="RFC4034"></xref> <xref
-      target="RFC4035"></xref> <xref target="RFC4398"></xref> <xref
-      target="RFC4509"></xref> <xref target="RFC6781"></xref> <xref
-      target="RFC5155"></xref>.</t>
+      target="RFC1034"/> <xref target="RFC1035"/> <xref target="RFC4033"/>
+      <xref target="RFC4034"/> <xref target="RFC4035"/> <xref
+      target="RFC4398"/> <xref target="RFC4509"/> <xref target="RFC6781"/>
+      <xref target="RFC5155"/>.</t>
 
       <t>This document defines a Negative Trust Anchor, which can be used
       during the transition to ubiquitous DNSSEC deployment. These are
@@ -234,7 +233,7 @@
       distributed by IANA or any other organization outside of the
       administrative boundary of the organization locally implementing a
       Negative Trust Anchor. Finally, Negative Trust Anchors pertain only to
-      DNSSEC and not to Public Key Infrastructures (PKI) such ad X.509.</t>
+      DNSSEC and not to Public Key Infrastructures (PKI) such as X.509.</t>
 
       <t>DNSSEC has now entered widespread deployment. However, domain signing
       tools and processes are not yet as mature and reliable as is the case
@@ -248,73 +247,29 @@
       non-validating resolver or contact their ISP to complain, rather than
       seeing this as a failure on the part of the domain they wanted to reach.
       Without the techniques in this document, this pressure may cause the
-      resolver operator to disable (or simply not deploy) DNSSEC
-      validation.</t>
-
-      <t>In the short-term, one potential way for DNS Operators to address
-      this is to use a Negative Trust Anchor to temporarily disable DNSSEC
-      validation for a specific misconfigured domain name. This immediately
-      restores access for end users while that domain's administrators fix
-      their misconfiguration. DNS Operators may prefer not to use this tool
-      from a purist&rsquo;s standpoint (DNSSEC should just work.); however,
-      during the global transition to DNSSEC, this or a similar tool is
-      necessary to reduce the negative impact both to end users and to DNS
-      Operators.</t>
-
-      <t>A Negative Trust Anchor should be considered a transitional and
-      temporary tactic which is not particularly scalable and should not be
-      used in the long-term. Over time, however, the use of Negative Trust
-      Anchors will become less necessary as DNSSEC-related domain
-      administration becomes more resilient.</t>
+      resolver operator to disable (or simply not deploy) DNSSEC validation.
+      Use of a Negative Trust Anchor to temporarily disable DNSSEC validation
+      for a specific misconfigured domain name immediately restores access for
+      end users. This allows the domain's administrators to fix their
+      misconfiguration while also allowing the organization using the Negative
+      Trust Anchor to keep DNSSEC validation enabled.</t>
     </section>
 
     <section anchor="Definition-of-a-Negative-Trust-Anchor"
              title="Definition of a Negative Trust Anchor" toc="include">
-      <t>Trust Anchors are defined in <xref target="RFC5914"></xref>. A trust
-      anchor should be used by a validating caching resolver as a starting
-      point for building the authentication chain for a signed DNS response.
-      The inverse of this is a Negative Trust Anchor, which creates a stopping
-      point for a caching resolver to end validation of the authentication
-      chain. Instead, the resolver sends the response as if the zone is
-      unsigned and does not set the AD bit. This Negative Trust Anchor can
-      potentially be placed at any level within the chain of trust and would
-      stop validation at that point in the chain.</t>
+      <t>Trust Anchors are defined in <xref target="RFC5914"/>. A trust anchor
+      should be used by a validating caching resolver as a starting point for
+      building the authentication chain for a signed DNS response. The inverse
+      of this is a Negative Trust Anchor, which creates a stopping point for a
+      caching resolver to end validation of the authentication chain. Instead,
+      the resolver sends the response as if the zone is unsigned and does not
+      set the AD bit. This Negative Trust Anchor can potentially be placed at
+      any level within the chain of trust and would stop validation at that
+      point in the chain.</t>
     </section>
 
-    <section anchor="Limited-Time-and-Scope-of-Use"
-             title="Limited Time and Scope of Use" toc="include">
-      <t>As noted in <xref target="intro"></xref>, the use of Negative Trust
-      Anchors should be temporary. These are key recommendations pertaining to
-      this practice: <list style="numbers">
-          <t>The general practice of using Negative Trust Anchors should be
-          limited to the transition to widespread deployment of DNSSEC
-          (including signing of domain names and validation in DNS recursive
-          resolvers). Thus, the practice of using Negative Trust Anchors
-          should not be permanent.</t>
-
-          <t>During this transition phase when Negative Trust Anchors may be
-          useful, the use of a particular Negative Trust Anchor should be
-          temporary.</t>
-
-          <t>So that the use of Negative Trust Anchors remains temporary and
-          useful only during a transition to widespread DNSSEC deployment, the
-          use and distribution of individual Negative Trust Anchors should not
-          be centralized, beyond the borders of one organization's operational
-          unit. Thus, no organization should endeavor to create and centrally
-          distribute Negative Trust Anchors to other organizations as was the
-          case with positive Trust Anchors prior to the signing of the
-          root.</t>
-
-          <t>As noted in <xref target="Intentionally-Broken-Domains"></xref>,
-          organizations that utilize Negative Trust Anchors should not add a
-          Negative Trust Anchor for any intentionally broken domain.</t>
-
-          <t>As noted in <xref
-          target="Use-of-a-Negative-Trust-Anchor"></xref>, use of a Negative
-          Trust Anchor should not be automatic in any way, and must involve
-          investigation by technical personnel trained in the operation of DNS
-          servers.</t>
-        </list></t>
+    <section anchor="delete" title="delete" toc="include">
+      <t/>
     </section>
 
     <section anchor="Domain-Validation-Failures"
@@ -324,37 +279,18 @@
       some sort, or as a result of misconfiguration on the part of an domain
       administrator. As domains transition to DNSSEC the most likely reason
       for a validation failure will be misconfiguration. Thus, domain
-      administrators should be sure to read <xref target="RFC6781"></xref> in
-      full. They should also pay special attention to Section 4.2, pertaining
-      to key rollovers, which appears to be the cause of many recent
-      validation failures.</t>
+      administrators should be sure to read <xref target="RFC6781"/> in full.
+      They should also pay special attention to Section 4.2, pertaining to key
+      rollovers, which appear to be the cause of many recent validation
+      failures.</t>
 
-      <t>In one recent example <xref
-      target="DNSSEC-Validation-Failure-Analysis"></xref>, a specific domain
-      name failed to validate. An investigation revealed that the domain's
-      administrators performed a Key Signing Key (KSK) rollover by (1)
-      generating a new key and (2) signing the domain with the new key.
-      However, they did not use a double-signing procedure for the KSK and a
-      pre-publish procedure for the Zone Signing Key (ZSK). Double-signing
-      refers to signing a zone with two KSKs and then updating the parent zone
-      with the new DS record so that both keys are valid at the same time.
-      This meant that the domain name was signed with the new KSK, but it was
-      not double-signed with the old KSK. So, the new key was used for signing
-      the zone but the old key was not. As a result, the domain could not be
-      trusted and returned an error when trying to reach the domain. Thus, the
-      domain was in a situation where the DNSSEC chain of trust was broken
-      because the Delegation Signer (DS) record pointed to the old KSK, which
-      was no longer used for signing the zone. (A DS record provides a link in
-      the chain of trust for DNSSEC from the parent zone to the child zone -
-      in this case between TLD and domain name.)</t>
-
-      <t>In addition, it is possible that some DNSSEC validation failures
-      could arise due to differences in how different software developers
-      interpret DNSSEC standards and/or how those developers choose to
-      implement support for DNSSEC. For example, it is conceivable that a
-      domain may be DNSSEC signed properly, and Unbound-based DNS recursive
-      resolvers will validate the domain but those using BIND or Nominum's
-      Vantio software may fail to validate a domain.</t>
+      <t>It is also possible that some DNSSEC validation failures could arise
+      due to differences in how different software developers interpret DNSSEC
+      standards and/or how those developers choose to implement support for
+      DNSSEC. For example, it is conceivable that a domain may be DNSSEC
+      signed properly, and one vendor's DNS recursive resolvers will validate
+      the domain but other vendors' software may fail to validate the
+      domain.</t>
     </section>
 
     <section anchor="End-User-Reaction" title="End User Reaction"
@@ -362,13 +298,11 @@
       <t>End users generally do not know what DNSSEC is, nor should they be
       expected to at the current time (especially absent widespread
       integration of DNSSEC indicators in end user software such as web
-      browsers). As a result, end users may incorrectly interpret the failure
-      to reach a domain due to DNSSEC-related misconfiguration . They may
-      (incorrectly) assume that their ISP is purposely blocking access to the
-      domain or as a performance failure on the part of their ISP (especially
-      of the ISP's DNS servers). End users may feel less satisfied with their
-      ISP's service, which may make them more likely to switch to a competing
-      ISP. They may also contact their ISP to complain, which of course will
+      browsers). As a result, end users may misinterpret the failure to reach
+      a domain due to DNSSEC-related misconfiguration . They may (incorrectly)
+      assume that their ISP is purposely blocking access to the domain or that
+      it is a performance failure on the part of their ISP (especially of the
+      ISP's DNS servers). They may contact their ISP to complain, which will
       incur cost for their ISP. In addition, they may use online tools and
       sites to complain of this problem, such as via a blog, web forum, or
       social media site, which may lead to dissatisfaction on the part of
@@ -384,13 +318,14 @@
       potential security threat. Use of a Negative Trust Anchor would allow
       the ISP to specifically remedy the failure to reach that domain, without
       compromising security for other sites. This would result in a satisfied
-      end user, with minimal impact to the ISP.</t>
+      end user, with minimal impact to the ISP, while maintaining the security
+      of DNSSEC for correctly maintained domains.</t>
     </section>
 
     <section anchor="Switching-to-a-Non-Validating-Resolver-is-Not-Recommended"
              title="Switching to a Non-Validating Resolver is Not Recommended"
              toc="include">
-      <t>As noted in <xref target="End-User-Reaction"></xref> some people may
+      <t>As noted in <xref target="End-User-Reaction"/> some people may
       consider switching to an alternative, non-validating resolver
       themselves, or may recommend that others do so. But if a domain fails
       DNSSEC validation and is inaccessible, this could very well be due to a
@@ -441,58 +376,48 @@
 
     <section anchor="Use-of-a-Negative-Trust-Anchor"
              title="Use of a Negative Trust Anchor" toc="include">
-      <t>When a domain has been confirmed to fail DNSSEC validation due to a
-      DNSSEC-related misconfiguration, an ISP or other DNS recursive resolver
-      operator may elect to use a Negative Trust Anchor for a domain or
-      sub-domain. This instructs a DNS recursive resolver to temporarily NOT
-      perform DNSSEC validation for a specific domain name. This immediately
-      restores access to the domain for end users while the domain's
-      administrator corrects the misconfiguration(s).</t>
+      <t>Technical personnel trained in the operation of DNS servers MUST
+      confirm that a failure is due to misconfiguration, as a similar breakage
+      could have occurred if an attacker gained access to a domain's
+      authoritative servers and modified those records or had the domain
+      pointed to their own rogue authoritative servers. They should also
+      confirm that the domain is not intentionally broken, such as for testing
+      purposes as noted in <xref target="Intentionally-Broken-Domains"/>.
+      Finally, they should make a reasonable attempt to contact the domain
+      owner of the misconfigured zone, preferably prior to implementing the
+      Negative Trust Anchor.</t>
 
       <t>In the case of a validation failure due to misconfiguration of a TLD
       or popular domain name (such as a top 100 website), this could make
       content or services in the affected TLD or domain inaccessible for a
-      large number of users. A Negative Trust Anchor can, therefore, be useful
-      in the short-term when used on a targeted and time-limited basis. It
-      does not and should not involve turning off validation more broadly. It
-      also helps during the transition to DNSSEC as organizations that are new
-      to signing their domains are still maturing their DNSSEC operational
-      practices, alleviating end user issues as noted in <xref
-      target="End-User-Reaction"></xref> and restoring end user access.
-      However, use of a Negative Trust Anchor should not be automatic in any
-      way, and must involve investigation by technical personnel trained in
-      the operation of DNS servers.</t>
+      large number of users. In such cases, it may be appropriate to use a
+      Negative Trust Anchor as soon as the misconfiguration is confirmed.</t>
 
-      <t>Technical personnel should also confirm that the domain is not
-      intentionally broken, such as for testing purposes as noted in <xref
-      target="Intentionally-Broken-Domains"></xref>. Such an investigation
-      must confirm that a failure is due to misconfiguration, as a similar
-      breakage could have occurred if an attacker gained access to a domain's
-      authoritative servers and modified those records or had the domain
-      pointed to their own rogue authoritative servers. In addition, personnel
-      should make a reasonable attempt to contact a domain for which a
-      Negative Trust Anchor may be used, and preferably prior to implementing
-      it.</t>
+      <t>Once a domain has been confirmed to fail DNSSEC validation due to a
+      DNSSEC-related misconfiguration, an ISP or other DNS recursive resolver
+      operator may elect to use a Negative Trust Anchor for that domain or
+      sub-domain. This instructs their DNS recursive resolver to temporarily
+      NOT perform DNSSEC validation at or in the misconfigured domain. This
+      immediately restores access to the domain for end users while the
+      domain's administrator corrects the misconfiguration(s). It does not and
+      should not involve turning off validation more broadly.</t>
 
-      <t>Furthermore, a Negative Trust Anchor MUST only be used for a short
-      duration, such as for a day or less. Implementors SHOULD set an end time
-      and date associated with any Negative Trust Anchor. Implementors SHOULD
-      in most cases limit the maximum duration to one day, meaning the
-      Negative Trust Anchor will be removed or invalidated from the point of
-      implementation, plus 86,400 seconds (one day). However, there may be
-      corner cases where a Negative Trust Anchor is needed for a longer period
-      of time. Optimally this time and date is set in a DNS recursive
-      resolver's configuration, though in the short-term this may also be
-      achieved via other systems or supporting processes.</t>
+      <t>A Negative Trust Anchor MUST only be used for a limited duration.
+      Implementors SHOULD allow the operator using the Negative Trust Andhor
+      to set an end time and date associated with any Negative Trust Anchor.
+      Optimally this time and date is set in a DNS recursive resolver's
+      configuration, though in the short-term this may also be achieved via
+      other systems or supporting processes. Use of a Negative Trust Anchor
+      MUST NOT be automatic. </t>
 
       <t>Finally, a Negative Trust Anchor SHOULD be used only in a specific
-      domain or sub-domain and would not affect validation at other names up
+      domain or sub-domain and MUST NOT affect validation of other names up
       the authentication chain. For example, a Negative Trust Anchor for
-      zone1.example.com would affect only names within zone1.example.com, and
-      validation would still be performed on example.com, .com, and the root
-      ("."). In another example, a Negative Trust Anchor for example.com would
-      affect only names within example.com, and validation would still be
-      performed on .com, and the root (".")</t>
+      zone1.example.com would affect only names at or below zone1.example.com,
+      and validation would still be performed on example.com, .com, and the
+      root ("."). In another example, a Negative Trust Anchor for example.com
+      would affect only names within example.com, and validation would still
+      be performed on .com, and the root (".")</t>
 
       <figure anchor="Negative-Trust-Anchor-Diagram"
               title="Negative Trust Anchor Diagram">
@@ -504,7 +429,7 @@
      TLD (com)             <=====||        |Resolver |<============>
          |                        +<------>+---------+
          |                        |                     DNS NTA
-         |                        |               (zone1.example.com)
+         |                        |                   (example.com)
  SUB TLD (example.com)     <------|                 <-------------->
          |                        |
          |                        |
@@ -516,44 +441,40 @@
 
     <section anchor="Managing-Negative-Trust-Anchors"
              title="Managing Negative Trust Anchors" toc="include">
-      <t>This tool is unlikely to be and probably should not be used over the
-      long-term since DNSSEC-related domain administration practices will
-      naturally improve over time. In addition, however, continued and
-      frequent use of Negative Trust Anchors is not scalable since it requires
-      investigation by technical personnel and may involve manual processes,
-      resulting in increased operational overhead (and therefore cost).</t>
-
       <t>While Negative Trust Anchors have proven useful during the early
       stages of DNSSEC adoption, domain owners are ultimately responsible for
       managing and ensuring their DNS records are configured correctly <xref
-      target="Responsibility-for-Failures"></xref>.</t>
+      target="Responsibility-for-Failures"/>.</t>
 
       <t>Most current implementations of DNS validating resolvers currently
-      follow <xref target="RFC4033"></xref> on defining the implementation of
-      Trust Anchor as either using Delegation Signer (DS), Key Signing Key
-      (KSK), or Zone Signing Key (ZSK). A Negative Trust Anchor should use
-      domain name formatting that signifies where in a delegation a validation
-      process should be stopped.</t>
+      follow <xref target="RFC4033"/> on defining the implementation of Trust
+      Anchor as either using Delegation Signer (DS), Key Signing Key (KSK), or
+      Zone Signing Key (ZSK). A Negative Trust Anchor should use domain name
+      formatting that signifies where in a delegation a validation process
+      should be stopped.</t>
 
       <t>Different DNS recursive resolvers may have different configuration
       names for a Negative Trust Anchor. For example, Unbound calls their
-      configuration "domain-insecure" <xref
-      target="Unbound-Configuration"></xref></t>
+      configuration "domain-insecure" </t>
+
+      <t>[need to update reference to full Appendix A, not just unbound]</t>
+
+      <t><xref target="Unbound-Configuration"/></t>
     </section>
 
     <section anchor="Removal-of-a-Negative-Trust-Anchor"
              title="Removal of a Negative Trust Anchor" toc="include">
-      <t>As explored in <xref target="Security-Considerations"></xref>, using
-      an NTA once the zone correctly validates can have security
-      considerations. It is therefore recommended that implementors should
-      periodically attempt to validate the domain in question, for the period
-      of time that the Negative Trust Anchor is in place, until such
-      validation is again successful. (Obviously a Negative Trust Anchor could
-      be removed prior to validation succeeding again, alleviating an
-      implementor of the need to continuing to test validation separate from
-      their normal operations.) Before removing the Negative Trust Anchor, all
-      authoritive resolvers listed in the zone should be checked. Due to
-      AnyCast or load balancers, this may not be possible.</t>
+      <t>As explored in <xref target="Security-Considerations"/>, using an NTA
+      once the zone correctly validates can have security considerations. It
+      is therefore recommended that implementors should periodically attempt
+      to validate the domain in question, for the period of time that the
+      Negative Trust Anchor is in place, until such validation is again
+      successful. (Obviously a Negative Trust Anchor could be removed prior to
+      validation succeeding again, alleviating an implementor of the need to
+      continuing to test validation separate from their normal operations.)
+      Before removing the Negative Trust Anchor, all authoritive resolvers
+      listed in the zone should be checked. Due to AnyCast or load balancers,
+      this may not be possible.</t>
 
       <t>Once all testing succeeds, a Negative Trust Anchor should be removed
       as soon as is reasonably possible. Optimally this is automatic, though
@@ -562,7 +483,7 @@
 
     <section anchor="Comparison-to-Other-DNS-Misconfigurations"
              title="Comparison to Other DNS Misconfigurations" toc="include">
-      <t>As noted in <xref target="Responsibility-for-Failures"></xref> domain
+      <t>As noted in <xref target="Responsibility-for-Failures"/> domain
       administrators are ultimately responsible for managing and ensuring
       their DNS records are configured correctly. ISPs or other DNS recursive
       resolver operators cannot and should not correct misconfigured A, CNAME,
@@ -578,13 +499,13 @@
              title="Intentionally Broken Domains" toc="include">
       <t>Some domains, such as dnssec-failed.org, have been intentionally
       broken for testing purposes <xref
-      target="Measuring-DNSSEC-Validation-of-Website-Visitors"></xref> <xref
-      target="Netalyzr"></xref>. For example, dnssec-failed.org is a
-      DNSSEC-signed domain that is broken. If an end user is querying a
-      validating DNS recursive resolver, then this or other similarly
-      intentionally broken domains should fail to resolve and should result in
-      a SERVFAIL error. If such a domain resolved successfully, then it is a
-      sign that the DNS recursive resolver is not fully validating.</t>
+      target="Measuring-DNSSEC-Validation-of-Website-Visitors"/> <xref
+      target="Netalyzr"/>. For example, dnssec-failed.org is a DNSSEC-signed
+      domain that is broken. If an end user is querying a validating DNS
+      recursive resolver, then this or other similarly intentionally broken
+      domains should fail to resolve and should result in a SERVFAIL error. If
+      such a domain resolved successfully, then it is a sign that the DNS
+      recursive resolver is not fully validating.</t>
 
       <t>Organizations that utilize Negative Trust Anchors should not add a
       Negative Trust Anchor for any intentionally broken domain.</t>
@@ -614,12 +535,12 @@
         validating resolver. As a result, implementors should consider
         transparently disclosing those Negative Trust Anchors which are
         currently in place or were in place in the past, such as on a website
-        <xref target="Disclosure-Example"></xref>. This is particularly
-        important since there is currently no special DNS query response code
-        that could indicate to end users or applications that a Negative Trust
-        Anchor is in place. Such disclosures should optimally include both the
-        data and time that the Negative Trust Anchor was put in place and when
-        it was removed.</t>
+        <xref target="Disclosure-Example"/>. This is particularly important
+        since there is currently no special DNS query response code that could
+        indicate to end users or applications that a Negative Trust Anchor is
+        in place. Such disclosures should optimally include both the data and
+        time that the Negative Trust Anchor was put in place and when it was
+        removed.</t>
       </section>
 
       <section anchor="Privacy-Considerations" title="Privacy Considerations"
@@ -745,10 +666,10 @@
             <organization abbrev="Comcast">Comcast</organization>
           </author>
 
-          <date day="24" month="January" year="2012" />
+          <date day="24" month="January" year="2012"/>
         </front>
 
-        <seriesInfo name="Comcast" value="" />
+        <seriesInfo name="Comcast" value=""/>
       </reference>
 
       <reference anchor="Measuring-DNSSEC-Validation-of-Website-Visitors"
@@ -756,9 +677,9 @@
         <front>
           <title>Is my Web site being used via a DNSSEC-validator?</title>
 
-          <author fullname="Jan-Piet Mens" initials="J.P." surname="Mens"></author>
+          <author fullname="Jan-Piet Mens" initials="J.P." surname="Mens"/>
 
-          <date day="30" month="July" year="2012" />
+          <date day="30" month="July" year="2012"/>
         </front>
       </reference>
 
@@ -785,11 +706,11 @@
             Berkeley</organization>
           </author>
 
-          <date day="5" month="April" year="2011" />
+          <date day="5" month="April" year="2011"/>
         </front>
 
         <seriesInfo name="Securing and Trusting Internet Names, SATIN 2011"
-                    value="SATIN 2011" />
+                    value="SATIN 2011"/>
       </reference>
 
       <reference anchor="Unbound-Configuration"
@@ -802,7 +723,7 @@
             <organization abbrev="NLnet">NLnet Labs</organization>
           </author>
 
-          <date month="June" year="2010" />
+          <date month="June" year="2010"/>
         </front>
       </reference>
 
@@ -815,20 +736,16 @@
             <organization abbrev="Comcast">Comcast</organization>
           </author>
 
-          <date day="13" month="February" year="2013" />
+          <date day="13" month="February" year="2013"/>
         </front>
 
-        <seriesInfo name="Comcast" value="" />
+        <seriesInfo name="Comcast" value=""/>
       </reference>
     </references>
 
     <section title="Configuration Examples">
       <t>The section contains example configurations to achive Negative Trust
       Anchor funcationality for the zone foo.example.com.</t>
-
-      <t>[ Editor (WK) note: Nameserver vendors are encouraged to provide
-      examples for their software. Additionally, I *think* the below is
-      correct, but more testing is encouraged... ]</t>
 
       <t>Please note: These are simply examples - nameserver operators are
       expected to test and understand the implications of these
@@ -846,21 +763,32 @@
       </section>
 
       <section title="ISC BIND">
-        <t>[TODO (WK): It this really the best way to do it? Ick.]</t>
+        <t>Use the "rndc" command:</t>
 
-        <t>We can achive this functionality by disabling all DNSSEC algorithms
-        for a zone. The operator can see which algorithms the zone is using,
-        or simply disable all supported algorithms.</t>
+        <t><spanx style="emph">rndc nta [-lifetime duration] [-force] foo.example.com [view]</spanx></t>
 
-        <t>This gets placed in the "global options" section of the config
-        file.</t>
+        <t>Set a negative trust anchor, disabling DNSSEC validation for the
+        given domain. Using -lifetime specifies the duration of the NTA, up to
+        one day. Using -force prevents the NTA from expiring before its full
+        lifetime, even if the domain can validate sooner. </t>
+      </section>
 
-        <t><figure>
-            <artwork><![CDATA[disable-algorithms "foo.example.com." {"RSAMD5", "RSA", "DH",
-  "DSA", "NSEC3DSA", "ECC", "RSASHA1", "NSEC3RSASHA1",
-  "RSASHA256", "RSASHA512", "ECCGOST", "ECDSAP256SHA256",
-  "ECDSAP384SHA384"; };]]></artwork>
-          </figure></t>
+      <section title="Nominum Vantio">
+        <t><spanx style="strong"/></t>
+
+        <t><spanx style="strong">negative-trust-anchors</spanx></t>
+
+        <t><spanx style="emph">Format</spanx>: name</t>
+
+        <t><spanx style="emph">Command Channel</spanx>: view.update name=world
+        negative-trust-anchors=(foo.example.com)</t>
+
+        <t><spanx style="emph">Command Channel</spanx>: resolver.update
+        name=res1 negative-trust-anchors=(foo.example.com)</t>
+
+        <t><spanx style="strong">Description</spanx>: Disables DNSSEC
+        validation for a domain, even if the domain is under an existing
+        security root.</t>
       </section>
     </section>
 
@@ -918,7 +846,7 @@
           <t>Issue: Make the NTA as specific as possible - resolved.</t>
         </list></t>
 
-      <t></t>
+      <t/>
     </section>
 
     <section title="Open Issues">
