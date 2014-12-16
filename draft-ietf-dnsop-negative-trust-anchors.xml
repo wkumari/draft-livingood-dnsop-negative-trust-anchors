@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-livingood-dnsop-negative-trust-anchors-01"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-00"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -163,7 +163,7 @@
       <!-- author role='editor' is an optional value here -->
     </author>
 
-    <date day="23" month="October" year="2014"/>
+    <date day="15" month="December" year="2014"/>
 
     <!-- META-DATA DECLARATIONS -->
 
@@ -201,12 +201,6 @@
       mature and reliable as those for non-DNSSEC-related domain
       administration tools and processes. Negative Trust Anchors (described in
       this document) can be used to mitigate DNSSEC validation failures.</t>
-
-      <t>[ Editor note: This document was originally
-      draft-livingood-negative-trust-anchors-07 - renamved at the request of
-      the DNSOP chairs ]</t>
-
-      <t/>
     </abstract>
 
     <!-- END META-DATA DECLARATIONS -->
@@ -827,10 +821,6 @@
       <t>Individual-07: Refresh document - needs revision and rework before
       IETF-91. Planning to add more contributors.</t>
 
-      <t>WG-00: Renamed at request of DNSOP co-chairs, added co-authors</t>
-
-      <t>WG-00 (cont):</t>
-
       <t><list style="symbols">
           <t>Using github issue tracker - go see
           https://github.com/wkumari/draft-livingood-dnsop-negative-trust-anchors/issues
@@ -844,7 +834,11 @@
           <t>Issue: Make the NTA as specific as possible - resolved.</t>
         </list></t>
 
-      <t/>
+      <t>WG-00</t>
+
+      <t><list style="symbols">
+          <t>Renamed because adopted by WG.</t>
+        </list></t>
     </section>
 
     <section title="Open Issues">
