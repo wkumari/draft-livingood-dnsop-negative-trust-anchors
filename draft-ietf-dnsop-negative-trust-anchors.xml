@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-01"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-02"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -202,11 +202,11 @@
       administration tools and processes. Negative Trust Anchors (described in
       this document) can be used to mitigate DNSSEC validation failures.</t>
 
-      <t>[RFC Editor: Please remove this before puiblication. This document is
+      <t>[RFC Editor: Please remove this before publication. This document is
       being stored in github at
       https://github.com/wkumari/draft-livingood-dnsop-negative-trust-anchors
       . Authors accept pull requests, and keep the latest (edit buffer)
-      versions there, so commenters can follow along at home.] </t>
+      versions there, so commenters can follow along at home.]</t>
     </abstract>
 
     <!-- END META-DATA DECLARATIONS -->
@@ -256,7 +256,7 @@
       Negative Trust Anchor to keep DNSSEC validation enabled and still reach
       the misconfigured domain.</t>
 
-      <t>It is worth noting the folowing text from <xref
+      <t>It is worth noting the following text from <xref
       target="RFC4033">RFC4033</xref> - "In the final analysis, however,
       authenticating both DNS keys and data is a matter of local policy, which
       may extend or even override the protocol extensions defined in this
@@ -286,7 +286,7 @@
       of this is a Negative Trust Anchor, which creates a stopping point for a
       caching resolver to end validation of the authentication chain. Instead,
       the resolver sends the response as if the zone is unsigned and does not
-      set the AD bit. Note that this is a behavior, and not a seperate
+      set the AD bit. Note that this is a behavior, and not a separate
       resource record. This Negative Trust Anchor can potentially be
       implemented at any level within the chain of trust and would stop
       validation from that point in the chain down.</t>
@@ -488,23 +488,23 @@
       the Negative Trust Anchor is in place, until such validation is again
       successful. NTAs MUST expire automatically when their configured
       lifetime ends. The lifetime MUST NOT exceed a week. Before removing the
-      Negative Trust Anchor, all authoritive resolvers listed in the zone
+      Negative Trust Anchor, all authoritative resolvers listed in the zone
       should be checked (due to anycast and load balancers it may not be
       possible to check all instances).</t>
 
       <t>Once all testing succeeds, a Negative Trust Anchor should be removed
-      as soon as is reasonably possible. One possiable method to automatically
+      as soon as is reasonably possible. One possible method to automatically
       determine when the NTA can be removed is to send a periodic query for
       type SOA at the NTA node; if it gets a response that it can validate
       (whether the response was an actual SOA answer or a NOERROR/NODATA with
       appropriate NSEC/NSEC3 records), the NTA is presumed no longer to be
-      necessary and is removed. Implmentations SHOULD, by default, perform
+      necessary and is removed. Implementations SHOULD, by default, perform
       this operation. Note that under some circumstances this is undesirable
       behavior (for example, if www.example.com has a bad signature, but
-      example.com/SOA is fine) and so implmentations may wish to allow the
+      example.com/SOA is fine) and so implementations may wish to allow the
       operator to override this spot-check / behavior.</t>
 
-      <t>When removing the NTA, the implmentation should remove all cached
+      <t>When removing the NTA, the implementation should remove all cached
       entries below the NTA node.</t>
     </section>
 
@@ -638,7 +638,7 @@
 
       <t>- Ralf Weber</t>
 
-      <t>Edward Lewis and Evan Hunt provided expecially large amounts of
+      <t>Edward Lewis and Evan Hunt provided especially large amounts of
       text.</t>
     </section>
   </middle>
@@ -774,15 +774,15 @@
     </references>
 
     <section title="Configuration Examples">
-      <t>The section contains example configurations to achive Negative Trust
-      Anchor funcationality for the zone foo.example.com.</t>
+      <t>The section contains example configurations to achieve Negative Trust
+      Anchor functionality for the zone foo.example.com.</t>
 
       <t>Please note: These are simply examples - nameserver operators are
       expected to test and understand the implications of these
       operations.</t>
 
       <section title="NLNet Labs Unbound">
-        <t>Unbound lets us simply disable validation eching for a specific
+        <t>Unbound lets us simply disable validation checking for a specific
         zone. See:
         &lt;http://unbound.net/documentation/howto_turnoff_dnssec.html&gt; [
         TODO(WK): Make this a "real" reference ]<figure>
@@ -840,20 +840,24 @@
       <t>WG-00 to WG-01:</t>
 
       <t><list style="symbols">
-          <t>Stole chuncks of text from Ed Lewis' mailing list "tirade"
-          :-)</t>
+          <t>Stole chunks of text from Ed Lewis' mailing list "tirade" :-)</t>
 
           <t>New rndc usage text from Evan.</t>
 
           <t>Deleted the (already resolved) open issues from Appendix C, moved
           the unresolved issues into github, resolved them!</t>
 
-          <t>Clarification that authmated removal is best removal method, and
-          how to implment (Evan Hunt)</t>
+          <t>Clarification that automated removal is best removal method, and
+          how to implement (Evan Hunt)</t>
 
-          <t>Clarifiy that an NTA is not a RR (Rick Lamb)</t>
+          <t>Clarify that an NTA is not a RR (Rick Lamb)</t>
 
           <t>Grammar fixes.</t>
+        </list>-01 to -02</t>
+
+      <t><list style="symbols">
+          <t>Gah! I forgot to run spell check. And I type like a chimpanzee
+          with bad hand-eye coordination... </t>
         </list></t>
 
       <t>Individual-00: First version published as an individual draft.</t>

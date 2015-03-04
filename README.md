@@ -18,7 +18,7 @@ Expires: September 5, 2015                                           Dyn
 
 
           Definition and Use of DNSSEC Negative Trust Anchors
-               draft-ietf-dnsop-negative-trust-anchors-01
+               draft-ietf-dnsop-negative-trust-anchors-02
 
 Abstract
 
@@ -29,11 +29,11 @@ Abstract
    (described in this document) can be used to mitigate DNSSEC
    validation failures.
 
-   [RFC Editor: Please remove this before puiblication.  This document
-   is being stored in github at https://github.com/wkumari/draft-
-   livingood-dnsop-negative-trust-anchors . Authors accept pull
-   requests, and keep the latest (edit buffer) versions there, so
-   commenters can follow along at home.]
+   [RFC Editor: Please remove this before publication.  This document is
+   being stored in github at https://github.com/wkumari/draft-livingood-
+   dnsop-negative-trust-anchors . Authors accept pull requests, and keep
+   the latest (edit buffer) versions there, so commenters can follow
+   along at home.]
 
 Status of This Memo
 
@@ -150,9 +150,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors           March 2015
    Negative Trust Anchor to keep DNSSEC validation enabled and still
    reach the misconfigured domain.
 
-   It is worth noting the folowing text from RFC4033 [RFC4033] - "In the
-   final analysis, however, authenticating both DNS keys and data is a
-   matter of local policy, which may extend or even override the
+   It is worth noting the following text from RFC4033 [RFC4033] - "In
+   the final analysis, however, authenticating both DNS keys and data is
+   a matter of local policy, which may extend or even override the
    protocol extensions defined in this document set."  A responsibility
    (one of many) of a caching server operator is to "protect the
    integrity of the cache."  DNSSEC is just a tool to help accomplish
@@ -189,7 +189,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors           March 2015
    point for a caching resolver to end validation of the authentication
    chain.  Instead, the resolver sends the response as if the zone is
    unsigned and does not set the AD bit.  Note that this is a behavior,
-   and not a seperate resource record.  This Negative Trust Anchor can
+   and not a separate resource record.  This Negative Trust Anchor can
    potentially be implemented at any level within the chain of trust and
    would stop validation from that point in the chain down.
 
@@ -414,24 +414,24 @@ Internet-Draft        DNSSEC Negative Trust Anchors           March 2015
    Negative Trust Anchor is in place, until such validation is again
    successful.  NTAs MUST expire automatically when their configured
    lifetime ends.  The lifetime MUST NOT exceed a week.  Before removing
-   the Negative Trust Anchor, all authoritive resolvers listed in the
+   the Negative Trust Anchor, all authoritative resolvers listed in the
    zone should be checked (due to anycast and load balancers it may not
    be possible to check all instances).
 
    Once all testing succeeds, a Negative Trust Anchor should be removed
-   as soon as is reasonably possible.  One possiable method to
+   as soon as is reasonably possible.  One possible method to
    automatically determine when the NTA can be removed is to send a
    periodic query for type SOA at the NTA node; if it gets a response
    that it can validate (whether the response was an actual SOA answer
    or a NOERROR/NODATA with appropriate NSEC/NSEC3 records), the NTA is
-   presumed no longer to be necessary and is removed.  Implmentations
+   presumed no longer to be necessary and is removed.  Implementations
    SHOULD, by default, perform this operation.  Note that under some
    circumstances this is undesirable behavior (for example, if
    www.example.com has a bad signature, but example.com/SOA is fine) and
-   so implmentations may wish to allow the operator to override this
+   so implementations may wish to allow the operator to override this
    spot-check / behavior.
 
-   When removing the NTA, the implmentation should remove all cached
+   When removing the NTA, the implementation should remove all cached
    entries below the NTA node.
 
 10.  Comparison to Other DNS Misconfigurations
@@ -582,7 +582,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors           March 2015
 
    - Ralf Weber
 
-   Edward Lewis and Evan Hunt provided expecially large amounts of text.
+   Edward Lewis and Evan Hunt provided especially large amounts of text.
 
 14.  References
 
@@ -664,8 +664,8 @@ Internet-Draft        DNSSEC Negative Trust Anchors           March 2015
 
 Appendix A.  Configuration Examples
 
-   The section contains example configurations to achive Negative Trust
-   Anchor funcationality for the zone foo.example.com.
+   The section contains example configurations to achieve Negative Trust
+   Anchor functionality for the zone foo.example.com.
 
 
 
@@ -681,9 +681,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors           March 2015
 
 A.1.  NLNet Labs Unbound
 
-   Unbound lets us simply disable validation eching for a specific zone.
-   See: <http://unbound.net/documentation/howto_turnoff_dnssec.html> [
-   TODO(WK): Make this a "real" reference ]
+   Unbound lets us simply disable validation checking for a specific
+   zone.  See: <http://unbound.net/documentation/
+   howto_turnoff_dnssec.html> [ TODO(WK): Make this a "real" reference ]
 
    server:
            domain-insecure: "foo.example.com"
@@ -742,19 +742,24 @@ Appendix B.  Document Change Log
 
    WG-00 to WG-01:
 
-   o  Stole chuncks of text from Ed Lewis' mailing list "tirade" :-)
+   o  Stole chunks of text from Ed Lewis' mailing list "tirade" :-)
 
    o  New rndc usage text from Evan.
 
    o  Deleted the (already resolved) open issues from Appendix C, moved
       the unresolved issues into github, resolved them!
 
-   o  Clarification that authmated removal is best removal method, and
-      how to implment (Evan Hunt)
+   o  Clarification that automated removal is best removal method, and
+      how to implement (Evan Hunt)
 
-   o  Clarifiy that an NTA is not a RR (Rick Lamb)
+   o  Clarify that an NTA is not a RR (Rick Lamb)
 
    o  Grammar fixes.
+
+   -01 to -02
+
+   o  Gah!  I forgot to run spell check.  And I type like a chimpanzee
+      with bad hand-eye coordination...
 
    Individual-00: First version published as an individual draft.
 
@@ -774,12 +779,7 @@ Appendix B.  Document Change Log
    suggested by Ralf Weber, Wes Hardaker, Nick Weaver, Tony Finch, Shane
    Kerr, Joe Abley, Murray Kucherawy, Olafur Gudmundsson.
 
-   Individual-04: Moved the section defining a NTA forward, and added
-   new text to the Abstract and Introduction per feedback from Paul
-   Hoffman.
 
-   Individual-05: Incorporated feedback from the DNSOP WG list received
-   on 2/17/13 and 2/18/13.  This is likely the final version before the
 
 
 
@@ -788,6 +788,12 @@ Ebersman, et al.        Expires September 5, 2015              [Page 14]
 Internet-Draft        DNSSEC Negative Trust Anchors           March 2015
 
 
+   Individual-04: Moved the section defining a NTA forward, and added
+   new text to the Abstract and Introduction per feedback from Paul
+   Hoffman.
+
+   Individual-05: Incorporated feedback from the DNSOP WG list received
+   on 2/17/13 and 2/18/13.  This is likely the final version before the
    IETF 86 draft cutoff date.  Updated references to RFC6781 to RFC6781,
    per March Davids.
 
@@ -829,12 +835,6 @@ Authors' Addresses
 
    Email: cgriffiths@gmail.com
    URI:   http://www.dyn.com
-
-
-
-
-
-
 
 
 
