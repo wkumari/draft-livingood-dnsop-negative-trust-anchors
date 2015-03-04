@@ -196,6 +196,13 @@
     <keyword>Negative Trust Anchors</keyword>
 
     <abstract>
+      <t/>
+
+      <t>[ LOCK: Warren has the pen and is trying to integrate comments: March
+      5th, 2015, 11:44AM EST ]</t>
+
+      <t/>
+
       <t>DNS Security Extensions (DNSSEC) is now entering widespread
       deployment. However, domain signing tools and processes are not yet as
       mature and reliable as those for non-DNSSEC-related domain
@@ -787,6 +794,18 @@
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
 
+      <t>Ind-07 - WG-00:<list style="symbols">
+          <t>Simply updated name to reflect WG doc.</t>
+
+          <t/>
+        </list></t>
+
+      <t>WG-00 to WG-01:</t>
+
+      <t><list>
+          <t/>
+        </list></t>
+
       <t>Individual-00: First version published as an individual draft.</t>
 
       <t>Individual-01: Fixed minor typos and grammatical nits. Closed all
@@ -832,12 +851,6 @@
           resolved.</t>
 
           <t>Issue: Make the NTA as specific as possible - resolved.</t>
-        </list></t>
-
-      <t>WG-00</t>
-
-      <t><list style="symbols">
-          <t>Renamed because adopted by WG.</t>
         </list></t>
     </section>
 
