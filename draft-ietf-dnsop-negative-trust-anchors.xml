@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-00"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-01"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -163,7 +163,7 @@
       <!-- author role='editor' is an optional value here -->
     </author>
 
-    <date day="15" month="December" year="2014"/>
+    <date day="04" month="March" year="2015"/>
 
     <!-- META-DATA DECLARATIONS -->
 
@@ -196,18 +196,17 @@
     <keyword>Negative Trust Anchors</keyword>
 
     <abstract>
-      <t/>
-
-      <t>[ LOCK: Warren has the pen and is trying to integrate comments: March
-      5th, 2015, 11:44AM EST ]</t>
-
-      <t/>
-
       <t>DNS Security Extensions (DNSSEC) is now entering widespread
       deployment. However, domain signing tools and processes are not yet as
       mature and reliable as those for non-DNSSEC-related domain
       administration tools and processes. Negative Trust Anchors (described in
       this document) can be used to mitigate DNSSEC validation failures.</t>
+
+      <t>[RFC Editor: Please remove this before puiblication. This document is
+      being stored in github at
+      https://github.com/wkumari/draft-livingood-dnsop-negative-trust-anchors
+      . Authors accept pull requests, and keep the latest (edit buffer)
+      versions there, so commenters can follow along at home.] </t>
     </abstract>
 
     <!-- END META-DATA DECLARATIONS -->
@@ -256,6 +255,27 @@
       misconfiguration, while also allowing the organization using the
       Negative Trust Anchor to keep DNSSEC validation enabled and still reach
       the misconfigured domain.</t>
+
+      <t>It is worth noting the folowing text from <xref
+      target="RFC4033">RFC4033</xref> - "In the final analysis, however,
+      authenticating both DNS keys and data is a matter of local policy, which
+      may extend or even override the protocol extensions defined in this
+      document set." A responsibility (one of many) of a caching server
+      operator is to "protect the integrity of the cache." DNSSEC is just a
+      tool to help accomplish that. It carries ancillary data that a local
+      cache administrator may use to filter out undesired responses. DNSSEC is
+      not an enforcement mechanism, it's a resource. When I see folks voice
+      opinions that DNSSEC's recommended operation has to strictly followed,
+      my gut reaction is that these folks have forgotten the purpose of all of
+      our efforts. We don't secure protocols to make things work better. We
+      don't operate the DNS because we like to run a well run machine. We
+      don't run the Internet for the fun of it. (Some might enjoy running it,
+      that's job satisfaction to some extent.) At the end of the day all that
+      matters is that what is being done benefits society. We run the Internet
+      to enrich society. We prefer a well run DNS because it saps less
+      resources than a poorly run DNS. We prefer secure protocols so that
+      people don't become victims (in some sense of the word). Make it work.
+      Do what it takes to make it work. "Local policy" rules.</t>
     </section>
 
     <section anchor="Definition-of-a-Negative-Trust-Anchor"
@@ -266,13 +286,10 @@
       of this is a Negative Trust Anchor, which creates a stopping point for a
       caching resolver to end validation of the authentication chain. Instead,
       the resolver sends the response as if the zone is unsigned and does not
-      set the AD bit. This Negative Trust Anchor can potentially be placed at
-      any level within the chain of trust and would stop validation from that
-      point in the chain down.</t>
-    </section>
-
-    <section anchor="delete" title="delete" toc="include">
-      <t/>
+      set the AD bit. Note that this is a behavior, and not a seperate
+      resource record. This Negative Trust Anchor can potentially be
+      implemented at any level within the chain of trust and would stop
+      validation from that point in the chain down.</t>
     </section>
 
     <section anchor="Domain-Validation-Failures"
@@ -280,7 +297,7 @@
       <t>A domain name can fail validation for two general reasons: a
       legitimate security failure such as due to an attack or compromise of
       some sort, or as a result of misconfiguration on the part of an domain
-      administrator. As domains transition to DNSSEC the most likely reason
+      administrator. As domains transition to DNSSEC, the most likely reason
       for a validation failure will be misconfiguration. Thus, domain
       administrators should be sure to read <xref target="RFC6781"/> in full.
       They should also pay special attention to Section 4.2, pertaining to key
@@ -328,7 +345,7 @@
     <section anchor="Switching-to-a-Non-Validating-Resolver-is-Not-Recommended"
              title="Switching to a Non-Validating Resolver is Not Recommended"
              toc="include">
-      <t>As noted in <xref target="End-User-Reaction"/> some people may
+      <t>As noted in <xref target="End-User-Reaction"/>, some people may
       consider switching to an alternative, non-validating resolver
       themselves, or may recommend that others do so. But if a domain fails
       DNSSEC validation and is inaccessible, this could very well be due to a
@@ -405,7 +422,7 @@
       should not involve turning off validation more broadly.</t>
 
       <t>A Negative Trust Anchor MUST only be used for a limited duration.
-      Implementors SHOULD allow the operator using the Negative Trust Andhor
+      Implementors SHOULD allow the operator using the Negative Trust Anchor
       to set an end time and date associated with any Negative Trust Anchor.
       Optimally this time and date is set in a DNS recursive resolver's
       configuration, though in the short-term this may also be achieved via
@@ -459,8 +476,6 @@
       names for a Negative Trust Anchor. For example, Unbound calls their
       configuration "domain-insecure."</t>
 
-      <t>[need to update reference to full Appendix A, not just unbound]</t>
-
       <t><xref target="Unbound-Configuration"/></t>
     </section>
 
@@ -471,18 +486,31 @@
       is therefore recommended that NTA implementors should periodically
       attempt to validate the domain in question, for the period of time that
       the Negative Trust Anchor is in place, until such validation is again
-      successful. Before removing the Negative Trust Anchor, all authoritive
-      resolvers listed in the zone should be checked. Due to AnyCast or load
-      balancers, this may not be possible.</t>
+      successful. NTAs MUST expire automatically when their configured
+      lifetime ends. The lifetime MUST NOT exceed a week. Before removing the
+      Negative Trust Anchor, all authoritive resolvers listed in the zone
+      should be checked (due to anycast and load balancers it may not be
+      possible to check all instances).</t>
 
       <t>Once all testing succeeds, a Negative Trust Anchor should be removed
-      as soon as is reasonably possible. Optimally this is automatic, though
-      it may also be achieved via other systems or supporting processes.</t>
+      as soon as is reasonably possible. One possiable method to automatically
+      determine when the NTA can be removed is to send a periodic query for
+      type SOA at the NTA node; if it gets a response that it can validate
+      (whether the response was an actual SOA answer or a NOERROR/NODATA with
+      appropriate NSEC/NSEC3 records), the NTA is presumed no longer to be
+      necessary and is removed. Implmentations SHOULD, by default, perform
+      this operation. Note that under some circumstances this is undesirable
+      behavior (for example, if www.example.com has a bad signature, but
+      example.com/SOA is fine) and so implmentations may wish to allow the
+      operator to override this spot-check / behavior.</t>
+
+      <t>When removing the NTA, the implmentation should remove all cached
+      entries below the NTA node.</t>
     </section>
 
     <section anchor="Comparison-to-Other-DNS-Misconfigurations"
              title="Comparison to Other DNS Misconfigurations" toc="include">
-      <t>As noted in <xref target="Responsibility-for-Failures"/> domain
+      <t>As noted in <xref target="Responsibility-for-Failures"/>, domain
       administrators are ultimately responsible for managing and ensuring
       their DNS records are configured correctly. ISPs or other DNS recursive
       resolver operators cannot and should not correct misconfigured A, CNAME,
@@ -609,6 +637,9 @@
       <t>- Nick Weaver</t>
 
       <t>- Ralf Weber</t>
+
+      <t>Edward Lewis and Evan Hunt provided expecially large amounts of
+      text.</t>
     </section>
   </middle>
 
@@ -764,12 +795,20 @@
       <section title="ISC BIND">
         <t>Use the "rndc" command:</t>
 
-        <t><spanx style="emph">rndc nta [-lifetime duration] [-force] foo.example.com [view]</spanx></t>
-
-        <t>Set a negative trust anchor, disabling DNSSEC validation for the
-        given domain. Using -lifetime specifies the duration of the NTA, up to
-        one day. Using -force prevents the NTA from expiring before its full
-        lifetime, even if the domain can validate sooner.</t>
+        <t><figure>
+            <artwork><![CDATA[  nta -dump
+                List all negative trust anchors.
+  nta [-lifetime duration] [-force] domain [view]
+                Set a negative trust anchor, disabling DNSSEC validation
+                for the given domain.
+                Using -lifetime specifies the duration of the NTA, up
+                to one week. The default is one hour.
+                Using -force prevents the NTA from expiring before its
+                full lifetime, even if the domain can validate sooner.
+  nta -remove domain [view]
+                Remove a negative trust anchor, re-enabling validation
+                for the given domain.]]></artwork>
+          </figure></t>
       </section>
 
       <section title="Nominum Vantio">
@@ -796,14 +835,25 @@
 
       <t>Ind-07 - WG-00:<list style="symbols">
           <t>Simply updated name to reflect WG doc.</t>
-
-          <t/>
         </list></t>
 
       <t>WG-00 to WG-01:</t>
 
-      <t><list>
-          <t/>
+      <t><list style="symbols">
+          <t>Stole chuncks of text from Ed Lewis' mailing list "tirade"
+          :-)</t>
+
+          <t>New rndc usage text from Evan.</t>
+
+          <t>Deleted the (already resolved) open issues from Appendix C, moved
+          the unresolved issues into github, resolved them!</t>
+
+          <t>Clarification that authmated removal is best removal method, and
+          how to implment (Evan Hunt)</t>
+
+          <t>Clarifiy that an NTA is not a RR (Rick Lamb)</t>
+
+          <t>Grammar fixes.</t>
         </list></t>
 
       <t>Individual-00: First version published as an individual draft.</t>
@@ -842,7 +892,7 @@
 
       <t><list style="symbols">
           <t>Using github issue tracker - go see
-          https://github.com/wkumari/draft-livingood-dnsop-negative-trust-anchors/issues
+          https://github.com/wkumari/draft-livingood-dnsop-negative-trust-anchors
           for more details.</t>
 
           <t>A bunch of readability improvments.</t>
@@ -852,104 +902,6 @@
 
           <t>Issue: Make the NTA as specific as possible - resolved.</t>
         </list></t>
-    </section>
-
-    <section title="Open Issues">
-      <t>[RFC Editor: This section is to be removed before publication]</t>
-
-      <t>Determine whether RFC 2119 language should be used or not when
-      describing things like the duration of a NTA.</t>
-
-      <t>The DNSOP WG should discuss whether a 1 day limit is reasonable,
-      whether a different time (more or less than 1 day, such as 1 hour or 1
-      week) should be specified, or whether no time should be specified (just
-      a recommendation that it SHOULD generally be limited to X).</t>
-
-      <t>Olafur Gudmundsson has suggested that we may want to consider whether
-      a non validatable RRSIG should be returned or not when a NTA is in
-      place. This was raised in the context of NLnet Labs' DNSSEC-Trigger,
-      which apparently acts like forwarding stub-validator. He said, "The
-      reason for this is if NTA strips signatures the stub-validator thinks it
-      is under attack and may a) go into recursive mode to try to resolve the
-      domain, getting to the right answer the long way. b) Give the wrong
-      error "Missing signatures" instead of the real error. If all the
-      validator does is not to set the AD bit for RRsets at and below the NTA,
-      stub-resolvers (and cascading resolvers) should be happy."</t>
-
-      <t>Determine whether an informative reference to X.509 in the
-      Introduction is necessary.</t>
-
-      <t>Is it desirable to say that NTAs should not be distributed across
-      organizational boundaries?</t>
-
-      <t>Per Warren Kumari, add examples to appendix. "it would be very
-      helpful to actually show how this is used, with e.g and example in an
-      Appendix, for -insert favorite resolver here-. The document contains a
-      lot of really useful content about why you might use one, how to
-      minimize damage, etc but (IMO) does't do a great job of explaining how
-      to actually do so". Rick Lamb and Joe Abley also agreed on the need for
-      this.</t>
-
-      <t>Per Rick Lamb, "it might be useful to have section 2 "Definition .."
-      make that clear for slow people like me - that the NTA is not an RR and
-      is more of a configuration. Maybe simply replacing "placed" with
-      "implemented" in section 2? "This NTA can potentially be
-      -placed/implemented- at any level within the chain of trust"</t>
-
-      <t>Per Olafur Gudmundsson, address fact that ALL authoritative name
-      servers must be working. "section 10 you talk about possible early
-      removal the NTA when validation succeeds but there may be instances
-      where validation succeeds when using a sub-set of the authoritative
-      servers thus NTA should only be removed if all servers are providing
-      "good" signatures."</t>
-
-      <t>Per Olafur Gudmundsson, "Furthermore what to do if some names work
-      but others do not, for example I remember a case where the records at
-      the apex worked but all names below the apex were signed by a key not in
-      the DNSKEY RRset, thus it is possible that either human or automated
-      checks may assume there is no problem when there actually is one. What
-      this is bringing to my mind is maybe you want a new section with
-      guidelines on how to test for failures and in what cases failure
-      justifies NTA and what tests MUST pass before preemttive removal of an
-      NTA."</t>
-
-      <t>Per Olafur Gudmundsson, "Also should there be guidance that removal
-      of NTA should include cleaning the caches of all RRsets below the
-      name?"</t>
-
-      <t>Reference and text per Ed Lewis: One thing that seems to need
-      repeating from time to time is this passage in RFC 4033. ... In the
-      final analysis, however, authenticating both DNS keys and data is a
-      matter of local policy, which may extend or even override the protocol
-      extensions defined in this document set. See Section 5 for further
-      discussion. A responsibility (one of many) of a caching server operator
-      is to "protect the integrity of the cache." DNSSEC is just a tool to
-      help accomplish that. It carries ancillary data that a local cache
-      administrator may use to filter out undesired responses. DNSSEC is not
-      an enforcement mechanism, it's a resource. When I see folks voice
-      opinions that DNSSEC's recommended operation has to strictly followed,
-      my gut reaction is that these folks have forgotten the purpose of all of
-      our efforts. We don't secure protocols to make things work better. We
-      don't operate the DNS because we like to run a well run machine. We
-      don't run the Internet for the fun of it. (Some might enjoy running it,
-      that's job satisfaction to some extent.) At the end of the day all that
-      matters is that what is being done benefits society. We run the Internet
-      to enrich society. We prefer a well run DNS because it saps less
-      resources than a poorly run DNS. We prefer secure protocols so that
-      people don't become victims (in some sense of the word). Make it work.
-      Do what it takes to make it work. "Local policy" rules.</t>
-
-      <t>Per David Conrad: I'd suggest that in the BCP/RFC/whatever, in
-      addition to recommending that NTAs be time capped and not written to
-      permanent storage, it should also recommend NTAs be written as
-      specifically as possible. (Should be obvious, but doesn't hurt to
-      reiterate I suppose).</t>
-
-      <t>Per Ralf Weber: Informing the domain owner on the validation failure.
-      There should be a section in the document that the operator deploying an
-      NTA has to inform the domain owner of the problem. (JL note: would
-      prefer to say operator SHOULD take reasonable steps to notify the domain
-      owner, etc.)</t>
     </section>
   </back>
 
