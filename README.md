@@ -18,7 +18,7 @@ Expires: October 24, 2015                                            Dyn
 
 
           Definition and Use of DNSSEC Negative Trust Anchors
-               draft-ietf-dnsop-negative-trust-anchors-03
+               draft-ietf-dnsop-negative-trust-anchors-04
 
 Abstract
 
@@ -404,9 +404,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors           April 2015
    example, dnssec-failed.org is a DNSSEC-signed domain that is broken.
    If an end user is querying a validating DNS recursive resolver, then
    this or other similarly intentionally broken domains should fail to
-   resolve and should result in a SERVFAIL error.  If such a domain
-   resolved successfully, then it is a sign that the DNS recursive
-   resolver is not fully validating.
+   resolve and should result in a "Server Failure" error (RCODE 2, also
+   known as 'SERVFAIL').  If such a domain resolved successfully, then
+   it is a sign that the DNS recursive resolver is not fully validating.
 
    Organizations that utilize Negative Trust Anchors should not add a
    Negative Trust Anchor for any intentionally broken domain.
@@ -516,6 +516,8 @@ Internet-Draft        DNSSEC Negative Trust Anchors           April 2015
 
    - Ed Lewis
 
+   - Jinmei Tatuya
+
    - Antoin Verschuren
 
    - Paul Vixie
@@ -523,8 +525,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors           April 2015
    - Patrik Wallstrom
 
    - Nick Weaver
-
-   - Ralf Weber
 
    Edward Lewis, Evan Hunt and Andew Sullivan provided especially large
    amounts of text and / or detailed review.
@@ -588,7 +588,7 @@ A.1.  NLNet Labs Unbound
 
    Unbound lets us simply disable validation checking for a specific
    zone.  See: <http://unbound.net/documentation/
-   howto_turnoff_dnssec.html> [ TODO(WK): Make this a "real" reference ]
+   howto_turnoff_dnssec.html>
 
    server:
            domain-insecure: "foo.example.com"
@@ -756,6 +756,12 @@ Appendix C.  Document Change Log
 
    [RFC Editor: This section is to be removed before publication]
 
+   -03 to -04:
+
+   o  Addressed some comment from an email from Jinmei that I had
+      missed.  Turns out others had made many of the same comments, and
+      so most had already been addressed.
+
    -02 to -03:
 
    o  Included text from Ralph into Appendix B
@@ -774,12 +780,6 @@ Appendix C.  Document Change Log
 
    o  Stole chunks of text from Ed Lewis' mailing list "tirade" :-)
 
-   o  New rndc usage text from Evan.
-
-   o  Deleted the (already resolved) open issues from Appendix C, moved
-      the unresolved issues into github, resolved them!
-
-
 
 
 
@@ -787,6 +787,11 @@ Ebersman, et al.        Expires October 24, 2015               [Page 14]
 
 Internet-Draft        DNSSEC Negative Trust Anchors           April 2015
 
+
+   o  New rndc usage text from Evan.
+
+   o  Deleted the (already resolved) open issues from Appendix C, moved
+      the unresolved issues into github, resolved them!
 
    o  Clarification that automated removal is best removal method, and
       how to implement (Evan Hunt)
@@ -830,11 +835,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors           April 2015
    discussion.  No changes in the main document - just expanded issue
    tracking.
 
-   Individual-07: Refresh document - needs revision and rework before
-   IETF-91.  Planning to add more contributors.
-
-   o  Using github issue tracker - go see https://github.com/wkumari/
-      draft-livingood-dnsop-negative-trust-anchors for more details.
 
 
 
@@ -843,6 +843,12 @@ Ebersman, et al.        Expires October 24, 2015               [Page 15]
 
 Internet-Draft        DNSSEC Negative Trust Anchors           April 2015
 
+
+   Individual-07: Refresh document - needs revision and rework before
+   IETF-91.  Planning to add more contributors.
+
+   o  Using github issue tracker - go see https://github.com/wkumari/
+      draft-livingood-dnsop-negative-trust-anchors for more details.
 
    o  A bunch of readability improvments.
 
@@ -882,12 +888,6 @@ Authors' Addresses
 
    Email: warren@kumari.net
    URI:   http://www.google.com
-
-
-
-
-
-
 
 
 

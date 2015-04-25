@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-03"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-04"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -479,9 +479,10 @@
       target="Netalyzr"/>. For example, dnssec-failed.org is a DNSSEC-signed
       domain that is broken. If an end user is querying a validating DNS
       recursive resolver, then this or other similarly intentionally broken
-      domains should fail to resolve and should result in a SERVFAIL error. If
-      such a domain resolved successfully, then it is a sign that the DNS
-      recursive resolver is not fully validating.</t>
+      domains should fail to resolve and should result in a "Server Failure"
+      error (RCODE 2, also known as 'SERVFAIL'). If such a domain resolved
+      successfully, then it is a sign that the DNS recursive resolver is not
+      fully validating.</t>
 
       <t>Organizations that utilize Negative Trust Anchors should not add a
       Negative Trust Anchor for any intentionally broken domain.</t>
@@ -577,6 +578,8 @@
 
       <t>- Ed Lewis</t>
 
+      <t>- Jinmei Tatuya</t>
+
       <t>- Antoin Verschuren</t>
 
       <t>- Paul Vixie</t>
@@ -584,8 +587,6 @@
       <t>- Patrik Wallstrom</t>
 
       <t>- Nick Weaver</t>
-
-      <t>- Ralf Weber</t>
 
       <t>Edward Lewis, Evan Hunt and Andew Sullivan provided especially large
       amounts of text and / or detailed review.</t>
@@ -688,8 +689,7 @@
       <section title="NLNet Labs Unbound">
         <t>Unbound lets us simply disable validation checking for a specific
         zone. See:
-        &lt;http://unbound.net/documentation/howto_turnoff_dnssec.html&gt; [
-        TODO(WK): Make this a "real" reference ]<figure>
+        &lt;http://unbound.net/documentation/howto_turnoff_dnssec.html&gt;<figure>
             <artwork><![CDATA[server:
         domain-insecure: "foo.example.com"
 ]]></artwork>
@@ -837,6 +837,14 @@
 
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
+
+      <t>-03 to -04:</t>
+
+      <t><list style="symbols">
+          <t>Addressed some comment from an email from Jinmei that I had
+          missed. Turns out others had made many of the same comments, and so
+          most had already been addressed.</t>
+        </list></t>
 
       <t>-02 to -03:<list style="symbols">
           <t>Included text from Ralph into Appendix B</t>
