@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-04"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-05"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -72,30 +72,16 @@
         <uri/>
       </address>
 
-      <!-- author role='editor' is an optional value here -->
+      <!-- author role='editor' is an optional value here-->
     </author>
 
     <author fullname="Chris Griffiths" initials="C." surname="Griffiths">
-      <organization abbrev="Dyn">Dyn</organization>
-
       <address>
         <postal>
-          <street>150 Dow Street</street>
-
-          <street>Tower Two</street>
-
-          <city>Manchester</city>
-
-          <region>NH</region>
-
-          <code>03101</code>
-
-          <country>US</country>
+          <street/>
         </postal>
 
         <email>cgriffiths@gmail.com</email>
-
-        <uri>http://www.dyn.com</uri>
       </address>
 
       <!-- author role='editor' is an optional value here -->
@@ -264,7 +250,11 @@
         the zone is unsigned and does not set the AD bit. Note that this is a
         behavior, and not a separate resource record. This Negative Trust
         Anchor can potentially be implemented at any level within the chain of
-        trust and would stop validation from that point in the chain down.</t>
+        trust and would stop validation from that point in the chain down.
+        Validation starts again if there is a positive trust anchor further
+        down in the chain. For example, if there is a NTA at example.com, and
+        a positive trust anchor at foo.bar.example.com, then validation
+        resumes for foo.bar.example.com and anything below it.</t>
       </section>
 
       <section anchor="Domain-Validation-Failures"
@@ -311,13 +301,13 @@
         switch from security-aware DNS resolvers to resolvers not performing
         DNSSEC validation. This is a shame since the ISP or other DNS
         recursive resolver operator is actually doing exactly what they are
-        supposed to do in failing to resolve a domain name, as this is the
-        expected result when a domain can no longer be validated, protecting
-        end users from a potential security threat. Use of a Negative Trust
-        Anchor would allow the ISP to specifically remedy the failure to reach
-        that domain, without compromising security for other sites. This would
-        result in a satisfied end user, with minimal impact to the ISP, while
-        maintaining the security of DNSSEC for correctly maintained
+        supposed to do in failing to resolve a domain name; this is the
+        expected result when a domain can no longer be validated and it
+        protects end users from a potential security threat. Use of a Negative
+        Trust Anchor would allow the ISP to specifically remedy the failure to
+        reach that domain, without compromising security for other sites. This
+        would result in a satisfied end user, with minimal impact to the ISP,
+        while maintaining the security of DNSSEC for correctly maintained
         domains.</t>
       </section>
 
@@ -353,13 +343,15 @@
       purposes as noted in <xref target="Intentionally-Broken-Domains"/>.
       Finally, they should make a reasonable attempt to contact the domain
       owner of the misconfigured zone, preferably prior to implementing the
-      Negative Trust Anchor.</t>
+      Negative Trust Anchor. Involving trained technical personnel is costly,
+      but operational experience suggests that this is a very rare event such
+      as around once per quarter (or even less).</t>
 
       <t>In the case of a validation failure due to misconfiguration of a TLD
-      or popular domain name (such as a top 100 website), this could make
-      content or services in the affected TLD or domain inaccessible for a
-      large number of users. In such cases, it may be appropriate to use a
-      Negative Trust Anchor as soon as the misconfiguration is confirmed.</t>
+      or popular domain name (such as a top 100 website), content or services
+      in the affected TLD or domain could be inaccessible for a large number
+      of users. In such cases, it may be appropriate to use a Negative Trust
+      Anchor as soon as the misconfiguration is confirmed.</t>
 
       <t>Once a domain has been confirmed to fail DNSSEC validation due to a
       DNSSEC-related misconfiguration, an ISP or other DNS recursive resolver
@@ -373,7 +365,7 @@
       <t>A Negative Trust Anchor MUST only be used for a limited duration.
       Implementors SHOULD allow the operator using the Negative Trust Anchor
       to set an end time and date associated with any Negative Trust Anchor.
-      Optimally this time and date is set in a DNS recursive resolver's
+      Optimally, this time and date is set in a DNS recursive resolver's
       configuration, though in the short-term this may also be achieved via
       other systems or supporting processes. Use of a Negative Trust Anchor
       MUST NOT be automatic.</t>
@@ -387,7 +379,10 @@
       another branch of the tree (such as example.net). In another example, a
       Negative Trust Anchor for example.com would affect only names within
       example.com, and validation would still be performed on .com, and the
-      root (".").</t>
+      root ("."). In this scenario, if there is a (probably manually
+      configured) trust anchor for zone1.example.com, validation would be
+      performed for zone1.example.com and subdomains of zone1.example.com.
+      </t>
 
       <figure anchor="Negative-Trust-Anchor-Diagram"
               title="Negative Trust Anchor Diagram">
@@ -404,8 +399,7 @@
          |                        |
          |                        |
          |                        |
-         (zone1.example.com <-----|
-]]></artwork>
+         (zone1.example.com <-----|          ]]></artwork>
       </figure>
     </section>
 
@@ -424,16 +418,15 @@
 
       <t>Different DNS recursive resolvers may have different configuration
       names for a Negative Trust Anchor. For example, Unbound calls their
-      configuration "domain-insecure."</t>
-
-      <t><xref target="Unbound-Configuration"/></t>
+      configuration "domain-insecure."<xref
+      target="Unbound-Configuration"/></t>
     </section>
 
     <section anchor="Removal-of-a-Negative-Trust-Anchor"
              title="Removal of a Negative Trust Anchor" toc="include">
       <t>As explored in <xref target="Security-Considerations"/>, using an NTA
       once the zone correctly validates can have security considerations. It
-      is therefore recommended that NTA implementors should periodically
+      is therefore RECOMMENDED that NTA implementors SHOULD periodically
       attempt to validate the domain in question, for the period of time that
       the Negative Trust Anchor is in place, until such validation is again
       successful. NTAs MUST expire automatically when their configured
@@ -454,7 +447,7 @@
       example.com/SOA is fine) and so implementations may wish to allow the
       operator to override this spot-check / behavior.</t>
 
-      <t>When removing the NTA, the implementation should remove all cached
+      <t>When removing the NTA, the implementation SHOULD remove all cached
       entries below the NTA node.</t>
     </section>
 
@@ -500,8 +493,8 @@
         a Negative Trust Anchor is used. In addition, the Negative Trust
         Anchor may be in place after the point in time when the DNS
         misconfiguration that caused validation to break has been fixed. Thus,
-        there may be a gap between when a domain has have been re-secured and
-        when a Negative Trust Anchor is removed. In addition, a Negative Trust
+        there may be a gap between when a domain has been re-secured and when
+        a Negative Trust Anchor is removed. In addition, a Negative Trust
         Anchor may be put in place by DNS recursive resolver operators without
         the knowledge of the authoritative domain administrator for a given
         domain name. However, attempts SHOULD be made to contact and inform
@@ -538,58 +531,14 @@
       this document and then providing feedback and constructive criticism for
       future revisions, or engaging in a healthy debate over the subject of
       the document. All of this was helpful and therefore the following
-      individuals merit acknowledgement:</t>
+      individuals merit acknowledgement: Joe Abley,John Barnitz, Tom
+      Creighton, Marco Davids, Brian Dickson, Patrik Falstrom, Tony Finch,
+      Chris Ganster, Olafur Gudmundsson, Peter Hagopian, Wes Hardaker, Paul
+      Hoffman, Shane Kerr, Murray Kucherawy, Rick Lamb, Marc Lampo, Ted Lemon,
+      Antoin Verschuren, Paul Vixie, Patrik Wallstrom, Nick Weaver</t>
 
-      <t>- Joe Abley</t>
-
-      <t>- John Barnitz</t>
-
-      <t>- Tom Creighton</t>
-
-      <t>- Marco Davids</t>
-
-      <t>- Brian Dickson</t>
-
-      <t>- Patrik Falstrom</t>
-
-      <t>- Tony Finch</t>
-
-      <t>- Chris Ganster</t>
-
-      <t>- Olafur Gudmundsson</t>
-
-      <t>- Peter Hagopian</t>
-
-      <t>- Wes Hardaker</t>
-
-      <t>- Paul Hoffman</t>
-
-      <t>- Shane Kerr</t>
-
-      <t>- Murray Kucherawy</t>
-
-      <t>- Warren Kumari</t>
-
-      <t>- Rick Lamb</t>
-
-      <t>- Marc Lampo</t>
-
-      <t>- Ted Lemon</t>
-
-      <t>- Ed Lewis</t>
-
-      <t>- Jinmei Tatuya</t>
-
-      <t>- Antoin Verschuren</t>
-
-      <t>- Paul Vixie</t>
-
-      <t>- Patrik Wallstrom</t>
-
-      <t>- Nick Weaver</t>
-
-      <t>Edward Lewis, Evan Hunt and Andew Sullivan provided especially large
-      amounts of text and / or detailed review.</t>
+      <t>Edward Lewis, Evan Hunt, Andew Sullivan and Tatuya Jinmei provided
+      especially large amounts of text and / or detailed review.</t>
     </section>
   </middle>
 
@@ -682,9 +631,12 @@
       <t>The section contains example configurations to achieve Negative Trust
       Anchor functionality for the zone foo.example.com.</t>
 
-      <t>Please note: These are simply examples - nameserver operators are
-      expected to test and understand the implications of these
-      operations.</t>
+      <t>Note: These are simply examples - nameserver operators are expected
+      to test and understand the implications of these operations. Note also
+      that some of available implementations may not implement all recommended
+      functionality in this document. In that case it is advisable to request
+      the developer or vendor of the implementation to support the missing
+      feature, rather than start using the incomplete implementation.</t>
 
       <section title="NLNet Labs Unbound">
         <t>Unbound lets us simply disable validation checking for a specific
@@ -736,23 +688,23 @@
 
     <section title="Discovering broken domains">
       <t>Discovering that a domain is DNSSEC broken as result of an operator
-      error instead of an attack is not trivial and the examples here should
+      error instead of an attack is not trivial, and the examples here should
       be vetted by an experienced professional before taking the decision on
       implementing an negative trust anchor.</t>
 
       <t>One of the key thing to look for when looking at a DNSSEC broken
       domain is consistency and history. It therefore is good if you have the
-      ability to look at the servers DNS traffic over a long period of time or
-      have a database that stores DNS names associated answers (this is often
-      referred to as a "passive DNS database"). Another invaluable tool is
-      dnsviz (http://www.dnsivz.net) which also stores DNSSEC related data
+      ability to look at the server's DNS traffic over a long period of time
+      or have a database that stores DNS names associated answers (this is
+      often referred to as a "passive DNS database"). Another invaluable tool
+      is dnsviz (http://www.dnsivz.net) which also stores DNSSEC related data
       historically. The drawback here is that you need to have it test the
-      domain before the incident occurs which might not always be the
-      case.</t>
+      domain before the incident occurs.</t>
 
       <t>The first and easiest thing to check is if the failure of the domain
-      is consistent across different software implementations. If not you want
-      to inform the vendor where it fails to look deeper in the issue.</t>
+      is consistent across different software implementations. If not, you
+      want to inform the vendor where it fails so that the vendor can look
+      more deeply into the issue.</t>
 
       <t>The next thing is to figure out what the actual failure mode is.
       There are several tools do this, an incomplete list includes:<list
@@ -765,28 +717,24 @@
           <t>iis.se DNS check (http://dnscheck.iis.se)</t>
         </list></t>
 
-      <t>most of these tools are open source so you can them install locally
-      if you want.</t>
+      <t>most of these tools are open source and can be installed locally.
+      However, using the tools over the Internet has the advantage of
+      providing visibility from a different point.</t>
 
-      <t>Using the tools over the Internet has the advantage though that as
-      these are not located in the same part of the network you already will
-      have more than local view by using different tools.</t>
-
-      <t>Once you figure out what the error is you need to check if it shows
-      consistently around the world and from all authoritative server.s Use
+      <t>Once you figure out what the error is, you need to check if it shows
+      consistently around the world and from all authoritative servers. Use
       DNS Tools (dig) or DNS looking glasses to verify this. An error that is
       consistently the same is more likely to be operator caused than an
-      attack, although that is not an guarantee. Also if the output from the
-      authoritative server is consistently different from the resolvers output
-      this hints to an attack rather then an error, unless there is EDNS0
-      client subnet (draft-vandergaast-edns-client-subnet) applied to the
-      domain.</t>
+      attack. Also if the output from the authoritative server is consistently
+      different from the resolvers output this hints to an attack rather then
+      an error, unless there is EDNS0 client subnet
+      (draft-ietf-dnsop-edns-client-subnet) applied to the domain.</t>
 
       <t>A last check is to look at the actual DNS data. Is the result of the
       query still the same or has it changed? While a lot of DNSSEC errors
-      occur on events that changes DNSSEC data the actual record someone wants
-      to go often stays the same. Again if the data is the same this is an
-      indication that the error is operator caused not an guarantee. Keep in
+      occur on events that change DNSSEC data, the actual record someone wants
+      to go to often stays the same. If the data is the same, this is an
+      indication (not a guarantee) that the error is operator caused. Keep in
       mind that with DNS being used to globally balance traffic the data
       associated to a name might be different in different parts of the
       Internet.</t>
@@ -795,48 +743,60 @@
       as operator signing errors on the Internet:</t>
 
       <t><list style="symbols">
-          <t>RRSIG timing issue. Each signature has an inception and expiry
-          time in which between it is valid. Letting this time expire without
-          creating a new signature is one of the most common DNSSEC errors. To
-          a lesser extent it also happened that signatures where made active
-          before the inception time. For all of these errors your primary
-          check is to check on the data. Signature expiration is also about
-          the only error we see on actual data (like www.example.com). All
-          other errors are more or less related to dealing with the chain of
-          trust established by DS records in the parent zone and DNSKEYs in
+          <t>RRSIG timing issue. Each signature has an inception time and
+          expiry time, between which it is valid. Letting this time expire
+          without creating a new signature is one of the most common DNSSEC
+          errors. To a lesser extent, this also occurs if signatures were made
+          active before the inception time. For all of these errors your
+          primary check is to check on the data. Signature expiration is also
+          about the only error we see on actual data (like www.example.com).
+          All other errors are more or less related to dealing with the chain
+          of trust established by DS records in the parent zone and DNSKEYs in
           the child zones. These mostly occur during key rollovers, but are
           not limited to that.</t>
 
-          <t>DNSKEYs in child zone don't match parents zone DS record. There
-          is a big variation of this that can happen at any point in the key
-          lifecycle. DNSViz is the best tools to show problems in the chain.
-          If you debug yourself use dig +multiline so that you can see the key
-          id of a DNSKEY. Common Variations of this can be:</t>
+          <t>DNSKEYs in child zone don't match the DS record in the parent
+          zone. There is a big variation of this that can happen at any point
+          in the key lifecycle. DNSViz is the best tools to show problems in
+          the chain. If you debug yourself use dig +multiline so that you can
+          see the key id of a DNSKEY. Common Variations of this can be:</t>
 
           <t>DS pointing to a non existent key in the child zone. Questions
-          for considerations here are: Has the existed before and was used?
-          Was there a change in the DNSKEY RRSet recently (indicating a key
-          rollover) and of course has the actual data in the zone changes. Is
-          the zone DNSSEC signed at all and has it been in the past?</t>
+          for consideration here include: Has there ever been a key (and, if
+          so, was it used)? Has there been a recent change in the DNSKEY RRSet
+          (indicating a key rollover)? Has the actual data in the zone
+          changed? Is the zone DNSSEC signed at all and has it been in the
+          past?</t>
 
           <t>DS pointing to an existent key, but no signatures are made with
-          the key. Again the checks above should be done with addition of
+          the key. The checks above should be done, with the addition of
           checking if another key in the DNSKEY RRSet is now used to sign the
           records.</t>
 
           <t>Data in DS or DNSKEY doesn't match the other. This is more common
           in initial setup when there was a copy and paste error. Again
-          checking history on data is the best you can do there. It's not
-          possible to give a checklist just to run through to decide if a
-          domain is broken because of an attack or an operator error.</t>
+          checking history on data is the best you can do there. </t>
         </list></t>
 
       <t>All of the above is just a starting point for consideration when
-      having to decide to deploy or not deploy a trust anchor.</t>
+      deciding whether or not to deploy a trust anchor. It is not possible to
+      provide a simple checklist to run through to determine if a domain is
+      broken because of an attack or an operator error.</t>
     </section>
 
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
+
+      <t>-04 to -05</t>
+
+      <t><list style="symbols">
+          <t>A large bunch of cleanups from Jinmei. Thanks!</t>
+
+          <t>Also clarified that if there is an NTA at foo.bar.baz.example,
+          and a positive *trust anchor* at bar.baz.example, the most specific
+          wins. I'm not very happy with this text, any additional text
+          gratefully accepted...</t>
+        </list></t>
 
       <t>-03 to -04:</t>
 

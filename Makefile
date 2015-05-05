@@ -45,15 +45,6 @@ endif
 draft_type := $(suffix $(firstword $(wildcard $(draft).md $(draft).org $(draft).xml)))
 
 ## Targets
-default:
-	@echo 
-	@echo "Useful targets:"
-	@echo "  txt: The Text version of the draft"
-	@echo "  commit: Creates README.md, commits (ci) and pushes the changes to git" 
-	@echo "  tag: Lists current tags, gets  anew one, commits and pushed to git"
-	@echo "  diff: Unsurprisingly, the diff..."
-	@echo
-
 
 .PHONY: latest txt html pdf submit diff clean update ghpages
 
@@ -61,6 +52,15 @@ latest: txt html
 txt: $(draft).txt
 html: $(draft).html
 pdf: $(draft).pdf
+
+help:
+	@echo
+	@echo "Useful targets:"
+	@echo "  txt: The Text version of the draft"
+	@echo "  commit: Creates README.md, commits (ci) and pushes the changes to git"
+	@echo "  tag: Lists current tags, gets a new one, commits and pushed to git"
+	@echo "  diff: Unsurprisingly, the diff..."
+	@echo
 
 
 idnits: $(draft).txt
@@ -78,16 +78,16 @@ endif
 ## diff
 
 diff:
-	git diff $(draft).xml
+	git diff $(draft).txt
 
 
-commit: $(draft).txt README.md
+commit: $(draft).txt
 	@echo "Making README.md and committing and pushing to github. Run 'make tag' to add and push a tag."
 	@echo '**Important:** Read CONTRIBUTING.md before submitting feedback or contributing' > README.md
 	@echo \`\`\` >> README.md
 	@cat $(draft).txt >> README.md
 	@echo \`\`\` >> README.md
-	read -p "Commit message: " msg; \
+	@read -p "Commit message: " msg; \
 	git commit -a -m "$$msg";
 	@git push
 
