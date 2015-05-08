@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-05"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-06"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -149,7 +149,7 @@
       <!-- author role='editor' is an optional value here -->
     </author>
 
-    <date day="5" month="May" year="2015"/>
+    <date day="8" month="May" year="2015"/>
 
     <!-- META-DATA DECLARATIONS -->
 
@@ -246,15 +246,16 @@
         anchor should be used by a validating caching resolver as a starting
         point for building the authentication chain for a signed DNS response.
         By way of analogy, negative trust anchors stop validation of the
-        authentication chain. Instead, the resolver sends the response as if
-        the zone is unsigned and does not set the AD bit. Note that this is a
-        behavior, and not a separate resource record. This Negative Trust
-        Anchor can potentially be implemented at any level within the chain of
-        trust and would stop validation from that point in the chain down.
-        Validation starts again if there is a positive trust anchor further
-        down in the chain. For example, if there is a NTA at example.com, and
-        a positive trust anchor at foo.bar.example.com, then validation
-        resumes for foo.bar.example.com and anything below it.</t>
+        authentication chain. Instead, the validator treats any upstream
+        responses as if the zone is unsigned and does not set the AD bit in
+        responses it sends to clients. Note that this is a behavior, and not a
+        separate resource record. This Negative Trust Anchor can potentially
+        be implemented at any level within the chain of trust and would stop
+        validation from that point in the chain down. Validation starts again
+        if there is a positive trust anchor further down in the chain. For
+        example, if there is a NTA at example.com, and a positive trust anchor
+        at foo.bar.example.com, then validation resumes for
+        foo.bar.example.com and anything below it.</t>
       </section>
 
       <section anchor="Domain-Validation-Failures"
@@ -262,8 +263,8 @@
         <t>A domain name can fail validation for two general reasons: a
         legitimate security failure such as due to an attack or compromise of
         some sort, or as a result of misconfiguration on the part of an domain
-        administrator. As domains transition to DNSSEC, the most likely reason
-        for a validation failure will be misconfiguration. Thus, domain
+        administrator. As domains transition to DNSSEC, the most common reason
+        for a validation failure has been misconfiguration. Thus, domain
         administrators should be sure to read <xref target="RFC6781"/> in
         full. They should also pay special attention to Section 4.2,
         pertaining to key rollovers, which appear to be the cause of many
@@ -410,16 +411,14 @@
       managing and ensuring their DNS records are configured correctly.</t>
 
       <t>Most current implementations of DNS validating resolvers currently
-      follow <xref target="RFC4033"/> on defining the implementation of Trust
-      Anchor as either using Delegation Signer (DS), Key Signing Key (KSK), or
-      Zone Signing Key (ZSK). A Negative Trust Anchor should use domain name
-      formatting that signifies where in a delegation a validation process
-      should be stopped.</t>
+      follow <xref target="RFC4033"/> on configuring a Trust Anchor using
+      either a public key as in a DNSKEY RR or a hash of a public key as in a
+      DS RR. A Negative Trust Anchor should use domain name formatting that
+      signifies where in a delegation a validation process should be
+      stopped.</t>
 
-      <t>Different DNS recursive resolvers may have different configuration
-      names for a Negative Trust Anchor. For example, Unbound calls their
-      configuration "domain-insecure."<xref
-      target="Unbound-Configuration"/></t>
+      <t>Different DNS validators may have different configuration names for a
+      Negative Trust Anchor. For examples see Appendix A.</t>
     </section>
 
     <section anchor="Removal-of-a-Negative-Trust-Anchor"
@@ -786,6 +785,12 @@
 
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
+
+      <t>-05 to -06</t>
+
+      <t><list style="symbols">
+          <t>A bunch of comments from Tony Finch.</t>
+        </list></t>
 
       <t>-04 to -05</t>
 
