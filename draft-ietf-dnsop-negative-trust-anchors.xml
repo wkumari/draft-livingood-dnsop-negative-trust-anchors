@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-07"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-10"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -149,7 +149,7 @@
       <!-- author role='editor' is an optional value here -->
     </author>
 
-    <date day="9" month="May" year="2015"/>
+    <date day="12" month="May" year="2015"/>
 
     <!-- META-DATA DECLARATIONS -->
 
@@ -348,12 +348,13 @@
       but operational experience suggests that this is a very rare event,
       usually on the order of once per quarter (or even less).</t>
 
-      <t>It is important to confirm that the comains is still under the
-      ownership / control of the legitimate owner of the domain - this is to
-      ensure that disabling validation for a specific domain does not direct
-      users to an address under an attackers control. Contacting the domain
-      owner allows the resolver operator to determine if the issue is a DNSSEC
-      misconfiguration or an attack.</t>
+      <t>It is important for the resolver operator to confirm that the domain
+      is still under the ownership / control of the legitimate owner of the
+      domain in order to ensure that disabling validation for a specific
+      domain does not direct users to an address under an attacker's control.
+      Contacting the domain owner and telling them the DNSSEC records that the
+      resolver operator is seeing allows the resolver operator to determine if
+      the issue is a DNSSEC misconfiguration or an attack.</t>
 
       <t>In the case of a validation failure due to misconfiguration of a TLD
       or popular domain name (such as a top 100 website), content or services
@@ -361,8 +362,8 @@
       of users. In such cases, it may be appropriate to use a Negative Trust
       Anchor as soon as the misconfiguration is confirmed. An example of a
       list of "top N" websites is the <xref target="Alexa">"Alexa Top 500
-      Sites on the Web" </xref>, another example would be to look through
-      historical query logs.</t>
+      Sites on the Web" </xref>, , or a list of the of the most-accessed names
+      in the resolver's cache.</t>
 
       <t>Once a domain has been confirmed to fail DNSSEC validation due to a
       DNSSEC-related misconfiguration, an ISP or other DNS recursive resolver
@@ -409,9 +410,11 @@
       <t>Different DNS validators may have different configuration names for a
       Negative Trust Anchor. For examples see Appendix A.</t>
 
-      <t>It is RECOMMENDED that implmentations warn operators (or treat as an
-      error) if they attempt to add an NTA for a domain that has a configured
-      positive trust anchor.</t>
+      <t>An NTA placed at a node where there is a configured positive trust
+      anchor MUST take precendence over that trust anchor, effectively
+      disabling it. Implementations MAY issue a warning or informational
+      message when this occurs, so that operators are not surprised when this
+      happens.</t>
 
       <section title="Alerting Users to NTA Use">
         <t>End users of a DNS recursive resolver or other people may wonder
@@ -593,8 +596,8 @@
 
       <t>All of the above is just a starting point for consideration when
       deciding whether or not to deploy a trust anchor. It is not possible to
-      provide a simple checklist to run through to determine if a domain is
-      broken because of an attack or an operator error.</t>
+      provide a simple checklist to run through to determine whether a domain
+      is broken because of an attack or an operator error.</t>
     </section>
 
     <section anchor="Other-Considerations" title="Other Considerations"
@@ -641,8 +644,8 @@
       Creighton, Marco Davids, Brian Dickson, Patrik Falstrom, Tony Finch,
       Chris Ganster, Olafur Gudmundsson, Peter Hagopian, Wes Hardaker, Paul
       Hoffman, Shane Kerr, Murray Kucherawy, Rick Lamb, Marc Lampo, Scott
-      Rose, Ted Lemon, Antoin Verschuren, Paul Vixie, Patrik Wallstrom, Nick
-      Weaver</t>
+      Rose, Ted Lemon, Antoin Verschuren, Paul Vixie, Patrik Wallstrom, W.C.A.
+      Wijngaards, Nick Weaver</t>
 
       <t>Edward Lewis, Evan Hunt, Andew Sullivan and Tatuya Jinmei provided
       especially large amounts of text and / or detailed review.</t>
@@ -762,16 +765,31 @@
 
       <section title="NLNet Labs Unbound">
         <t>Unbound lets us simply disable validation checking for a specific
-        zone.</t>
-
-        <t>For additional information see <xref
-        target="Unound-Configuration"/></t>
+        zone by adding configuration statements to unbound.conf:</t>
 
         <t><figure>
             <artwork><![CDATA[server:
         domain-insecure: "foo.example.com"
 ]]></artwork>
           </figure></t>
+
+        <t>Using the 'unbound-control' command one can add and remove Negative
+        Trust Anchors without restarting the nameserver.</t>
+
+        <t><figure>
+            <artwork><![CDATA[   Using the "unbound-control" command:
+        list_insecure                 list domain-insecure zones
+        insecure_add zone             add domain-insecure zone
+        insecure_remove zone          remove domain-insecure zone
+]]></artwork>
+          </figure></t>
+
+        <t>Items added with the "unbound-control" command are added to the
+        running server and are lost when the server is restarted. Items from
+        unbound.conf stay after restart. </t>
+
+        <t>For additional information see <xref
+        target="Unound-Configuration"/></t>
       </section>
 
       <section title="ISC BIND">
@@ -815,7 +833,24 @@
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
 
-      <t>-06 to 07<list>
+      <t>-09 to -10<list style="symbols">
+          <t>'Implementations MAY issue a warning or informational message
+          when this occurs' - changed SHOULD to MAY, per Evan.</t>
+        </list></t>
+
+      <t>-08 to -09<list style="symbols">
+          <t>Clarified that an NTA MUST take precedece over a positive, local
+          TA.</t>
+        </list></t>
+
+      <t>-07 to -08<list style="symbols">
+          <t>Added some cleanup from Paul Hoffman and Evan Hunt. </t>
+
+          <t>Some better text on how to make Unbound do this, provided by
+          W.C.A. Wijngaards.</t>
+        </list></t>
+
+      <t>-06 to -07<list style="symbols">
           <t>Addressed a large number of comments from Paul Hoffman, Scott
           Rose and some more from Jinmei.</t>
         </list></t>
