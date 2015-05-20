@@ -354,7 +354,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
    Negative Trust Anchor.  For examples see Appendix A.
 
    An NTA placed at a node where there is a configured positive trust
-   anchor MUST take precendence over that trust anchor, effectively
+   anchor MUST take precedence over that trust anchor, effectively
    disabling it.  Implementations MAY issue a warning or informational
    message when this occurs, so that operators are not surprised when
    this happens.
@@ -606,7 +606,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
    of this document and then providing feedback and constructive
    criticism for future revisions, or engaging in a healthy debate over
    the subject of the document.  All of this was helpful and therefore
-   the following individuals merit acknowledgement: Joe Abley,John
+   the following individuals merit acknowledgement: Joe Abley, John
    Barnitz, Tom Creighton, Marco Davids, Brian Dickson, Patrik Falstrom,
    Tony Finch, Chris Ganster, Olafur Gudmundsson, Peter Hagopian, Wes
    Hardaker, Paul Hoffman, Shane Kerr, Murray Kucherawy, Rick Lamb, Marc
@@ -620,7 +620,7 @@ Ebersman, et al.        Expires November 13, 2015              [Page 11]
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
 
-   Edward Lewis, Evan Hunt, Andew Sullivan and Tatuya Jinmei provided
+   Edward Lewis, Evan Hunt, Andrew Sullivan and Tatuya Jinmei provided
    especially large amounts of text and / or detailed review.
 
 10.  References
@@ -766,6 +766,10 @@ Appendix B.  Document Change Log
 
    [RFC Editor: This section is to be removed before publication]
 
+   -10 to 10.1
+
+   o  Fixed some typos (e.g Anrew -> Andrew)
+
    -09 to -10
 
    o  'Implementations MAY issue a warning or informational message when
@@ -773,12 +777,8 @@ Appendix B.  Document Change Log
 
    -08 to -09
 
-   o  Clarified that an NTA MUST take precedece over a positive, local
+   o  Clarified that an NTA MUST take precedence over a positive, local
       TA.
-
-   -07 to -08
-
-   o  Added some cleanup from Paul Hoffman and Evan Hunt.
 
 
 
@@ -787,6 +787,10 @@ Ebersman, et al.        Expires November 13, 2015              [Page 14]
 
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
+
+   -07 to -08
+
+   o  Added some cleanup from Paul Hoffman and Evan Hunt.
 
    o  Some better text on how to make Unbound do this, provided by
       W.C.A.  Wijngaards.
@@ -833,16 +837,14 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
    o  Stole chunks of text from Ed Lewis' mailing list "tirade" :-)
 
-   o  New rndc usage text from Evan.
-
-
-
 
 
 Ebersman, et al.        Expires November 13, 2015              [Page 15]
 
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
+
+   o  New rndc usage text from Evan.
 
    o  Deleted the (already resolved) open issues from Appendix C, moved
       the unresolved issues into github, resolved them!
@@ -889,8 +891,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
    discussion.  No changes in the main document - just expanded issue
    tracking.
 
-   Individual-07: Refresh document - needs revision and rework before
-   IETF-91.  Planning to add more contributors.
 
 
 
@@ -899,6 +899,9 @@ Ebersman, et al.        Expires November 13, 2015              [Page 16]
 
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
+
+   Individual-07: Refresh document - needs revision and rework before
+   IETF-91.  Planning to add more contributors.
 
    o  Using github issue tracker - go see https://github.com/wkumari/
       draft-livingood-dnsop-negative-trust-anchors for more details.
@@ -937,6 +940,22 @@ Authors' Addresses
    URI:   http://www.google.com
 
 
+
+
+
+
+
+
+
+
+
+
+
+Ebersman, et al.        Expires November 13, 2015              [Page 17]
+
+Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
+
+
    Jason Livingood
    Comcast
    One Comcast Center
@@ -948,30 +967,11 @@ Authors' Addresses
    URI:   http://www.comcast.com
 
 
-
-
-
-Ebersman, et al.        Expires November 13, 2015              [Page 17]
-
-Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
-
-
    Ralf Weber
    Nominum
 
    Email: Ralf.Weber@nominum.com
    URI:   http://www.nominum.com
-
-
-
-
-
-
-
-
-
-
-
 
 
 

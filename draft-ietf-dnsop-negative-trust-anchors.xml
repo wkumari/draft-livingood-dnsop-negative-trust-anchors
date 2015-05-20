@@ -405,13 +405,13 @@
       <t>Most current implementations of DNS validating resolvers currently
       follow <xref target="RFC4033"/> on configuring a Trust Anchor using
       either a public key as in a DNSKEY RR or a hash of a public key as in a
-      DS RR. </t>
+      DS RR.</t>
 
       <t>Different DNS validators may have different configuration names for a
       Negative Trust Anchor. For examples see Appendix A.</t>
 
       <t>An NTA placed at a node where there is a configured positive trust
-      anchor MUST take precendence over that trust anchor, effectively
+      anchor MUST take precedence over that trust anchor, effectively
       disabling it. Implementations MAY issue a warning or informational
       message when this occurs, so that operators are not surprised when this
       happens.</t>
@@ -475,7 +475,7 @@
 
       <t>With DNSSEC breakage, it is often possible to tell that there is a
       misconfiguration by looking at the data and not needing to guess what it
-      should have been. </t>
+      should have been.</t>
     </section>
 
     <section anchor="Intentionally-Broken-Domains"
@@ -640,14 +640,14 @@
       this document and then providing feedback and constructive criticism for
       future revisions, or engaging in a healthy debate over the subject of
       the document. All of this was helpful and therefore the following
-      individuals merit acknowledgement: Joe Abley,John Barnitz, Tom
+      individuals merit acknowledgement: Joe Abley, John Barnitz, Tom
       Creighton, Marco Davids, Brian Dickson, Patrik Falstrom, Tony Finch,
       Chris Ganster, Olafur Gudmundsson, Peter Hagopian, Wes Hardaker, Paul
       Hoffman, Shane Kerr, Murray Kucherawy, Rick Lamb, Marc Lampo, Scott
       Rose, Ted Lemon, Antoin Verschuren, Paul Vixie, Patrik Wallstrom, W.C.A.
       Wijngaards, Nick Weaver</t>
 
-      <t>Edward Lewis, Evan Hunt, Andew Sullivan and Tatuya Jinmei provided
+      <t>Edward Lewis, Evan Hunt, Andrew Sullivan and Tatuya Jinmei provided
       especially large amounts of text and / or detailed review.</t>
     </section>
   </middle>
@@ -738,7 +738,7 @@
 
       <reference anchor="Alexa" target="http://www.alexa.com/topsites">
         <front>
-          <title>Alexa "The top 500 sites on the web. " </title>
+          <title>Alexa "The top 500 sites on the web. "</title>
 
           <author fullname="Alexa">
             <organization abbrev="Comcast">Alexa, an Amazon.com
@@ -786,7 +786,7 @@
 
         <t>Items added with the "unbound-control" command are added to the
         running server and are lost when the server is restarted. Items from
-        unbound.conf stay after restart. </t>
+        unbound.conf stay after restart.</t>
 
         <t>For additional information see <xref
         target="Unound-Configuration"/></t>
@@ -833,18 +833,22 @@
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
 
+      <t>-10 to 10.1<list style="symbols">
+          <t>Fixed some typos (e.g Anrew -&gt; Andrew)</t>
+        </list></t>
+
       <t>-09 to -10<list style="symbols">
           <t>'Implementations MAY issue a warning or informational message
           when this occurs' - changed SHOULD to MAY, per Evan.</t>
         </list></t>
 
       <t>-08 to -09<list style="symbols">
-          <t>Clarified that an NTA MUST take precedece over a positive, local
+          <t>Clarified that an NTA MUST take precedence over a positive, local
           TA.</t>
         </list></t>
 
       <t>-07 to -08<list style="symbols">
-          <t>Added some cleanup from Paul Hoffman and Evan Hunt. </t>
+          <t>Added some cleanup from Paul Hoffman and Evan Hunt.</t>
 
           <t>Some better text on how to make Unbound do this, provided by
           W.C.A. Wijngaards.</t>
