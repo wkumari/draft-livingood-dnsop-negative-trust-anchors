@@ -207,11 +207,11 @@
       Anchors (NTAs) are configured locally on a validating DNS recursive
       resolver to shield end users from DNSSEC-related authoritative name
       server operational errors. Negative Trust Anchors are intended to be
-      temporary, and should not be distributed by IANA or any other
-      organization outside of the administrative boundary of the organization
-      locally implementing a Negative Trust Anchor. Finally, Negative Trust
-      Anchors pertain only to DNSSEC and not to Public Key Infrastructures
-      (PKI) such as X.509.</t>
+      temporary, and should only be implemented by the organization requiring
+      a Negative Trust Anchor (and not distributed by any organizations
+      outside of the administrative boundary). Finally, Negative Trust Anchors
+      pertain only to DNSSEC and not to Public Key Infrastructures (PKI) such
+      as X.509.</t>
 
       <t>DNSSEC has now entered widespread deployment. However, the DNSSEC
       signing tools and processes are less mature and reliable than those for
@@ -262,7 +262,7 @@
                title="Domain Validation Failures" toc="include">
         <t>A domain name can fail validation for two general reasons: a
         legitimate security failure such as due to an attack or compromise of
-        some sort, or as a result of misconfiguration on the part of an domain
+        some sort, or as a result of misconfiguration on the part of a zone
         administrator. As domains transition to DNSSEC, the most common reason
         for a validation failure has been misconfiguration. Thus, domain
         administrators should be sure to read <xref target="RFC6781"/> in
@@ -529,7 +529,8 @@
           <t>Verisign DNSSEC debugger
           (http://dnssec-debugger.verisignlabs.com)</t>
 
-          <t>iis.se DNS check (http://dnscheck.iis.se)</t>
+          <t>zonemaster (http://www.zonemaster.fr,
+          https://github.com/dotse/zonemaster)</t>
         </list></t>
 
       <t>most of these tools are open source and can be installed locally.
@@ -837,6 +838,9 @@
           <t>Incoroprated comments from IETF LC, including:</t>
 
           <t>A. Schulze - s/Unound/Unbound/</t>
+
+          <t>Joe Abley: Tone in into jarring. S1.2 s/domain administrator/zone
+          administrator/, dnscheck -&gt; zonemaster</t>
         </list></t>
 
       <t>-10 to 10.1<list style="symbols">

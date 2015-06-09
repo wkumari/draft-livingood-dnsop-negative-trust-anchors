@@ -123,9 +123,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
    Trust Anchors (NTAs) are configured locally on a validating DNS
    recursive resolver to shield end users from DNSSEC-related
    authoritative name server operational errors.  Negative Trust Anchors
-   are intended to be temporary, and should not be distributed by IANA
-   or any other organization outside of the administrative boundary of
-   the organization locally implementing a Negative Trust Anchor.
+   are intended to be temporary, and should only be implemented by the
+   organization requiring a Negative Trust Anchor (and not distributed
+   by any organizations outside of the administrative boundary).
    Finally, Negative Trust Anchors pertain only to DNSSEC and not to
    Public Key Infrastructures (PKI) such as X.509.
 
@@ -185,12 +185,12 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
    A domain name can fail validation for two general reasons: a
    legitimate security failure such as due to an attack or compromise of
-   some sort, or as a result of misconfiguration on the part of an
-   domain administrator.  As domains transition to DNSSEC, the most
-   common reason for a validation failure has been misconfiguration.
-   Thus, domain administrators should be sure to read [RFC6781] in full.
-   They should also pay special attention to Section 4.2, pertaining to
-   key rollovers, which appear to be the cause of many recent validation
+   some sort, or as a result of misconfiguration on the part of a zone
+   administrator.  As domains transition to DNSSEC, the most common
+   reason for a validation failure has been misconfiguration.  Thus,
+   domain administrators should be sure to read [RFC6781] in full.  They
+   should also pay special attention to Section 4.2, pertaining to key
+   rollovers, which appear to be the cause of many recent validation
    failures.
 
    It is also possible that some DNSSEC validation failures could arise
@@ -484,7 +484,8 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
    o  Verisign DNSSEC debugger (http://dnssec-debugger.verisignlabs.com)
 
-   o  iis.se DNS check (http://dnscheck.iis.se)
+   o  zonemaster (http://www.zonemaster.fr, https://github.com/dotse/
+      zonemaster)
 
    most of these tools are open source and can be installed locally.
    However, using the tools over the Internet has the advantage of
@@ -498,7 +499,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
    consistently different from the resolvers output this hints to an
    attack rather then an error, unless there is EDNS0 client subnet
    (draft-ietf-dnsop-edns-client-subnet) applied to the domain.
-
 
 
 
@@ -772,14 +772,14 @@ Appendix B.  Document Change Log
 
    o  A.  Schulze - s/Unound/Unbound/
 
+   o  Joe Abley: Tone in into jarring.  S1.2 s/domain administrator/zone
+      administrator/, dnscheck -> zonemaster
+
    -10 to 10.1
 
    o  Fixed some typos (e.g Anrew -> Andrew)
 
    -09 to -10
-
-   o  'Implementations MAY issue a warning or informational message when
-      this occurs' - changed SHOULD to MAY, per Evan.
 
 
 
@@ -787,6 +787,9 @@ Ebersman, et al.        Expires November 13, 2015              [Page 14]
 
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
+
+   o  'Implementations MAY issue a warning or informational message when
+      this occurs' - changed SHOULD to MAY, per Evan.
 
    -08 to -09
 
@@ -833,9 +836,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
    o  Updated keywords
 
-   -01 to -02:
-
-
 
 
 
@@ -843,6 +843,8 @@ Ebersman, et al.        Expires November 13, 2015              [Page 15]
 
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
+
+   -01 to -02:
 
    o  Gah!  I forgot to run spell check.  And I type like a chimpanzee
       with bad hand-eye coordination...
@@ -889,8 +891,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
    new text to the Abstract and Introduction per feedback from Paul
    Hoffman.
 
-   Individual-05: Incorporated feedback from the DNSOP WG list received
-   on 2/17/13 and 2/18/13.  This is likely the final version before the
 
 
 
@@ -900,6 +900,8 @@ Ebersman, et al.        Expires November 13, 2015              [Page 16]
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
 
+   Individual-05: Incorporated feedback from the DNSOP WG list received
+   on 2/17/13 and 2/18/13.  This is likely the final version before the
    IETF 86 draft cutoff date.  Updated references to RFC6781 to RFC6781,
    per March Davids.
 
@@ -945,8 +947,6 @@ Authors' Addresses
 
    Email: warren@kumari.net
    URI:   http://www.google.com
-
-
 
 
 
