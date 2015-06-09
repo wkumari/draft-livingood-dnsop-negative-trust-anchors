@@ -644,8 +644,8 @@
       Creighton, Marco Davids, Brian Dickson, Patrik Falstrom, Tony Finch,
       Chris Ganster, Olafur Gudmundsson, Peter Hagopian, Wes Hardaker, Paul
       Hoffman, Shane Kerr, Murray Kucherawy, Rick Lamb, Marc Lampo, Scott
-      Rose, Ted Lemon, Antoin Verschuren, Paul Vixie, Patrik Wallstrom, W.C.A.
-      Wijngaards, Nick Weaver</t>
+      Rose, Ted Lemon, A. Schulze, Antoin Verschuren, Paul Vixie, Patrik
+      Wallstrom, W.C.A. Wijngaards, Nick Weaver</t>
 
       <t>Edward Lewis, Evan Hunt, Andrew Sullivan and Tatuya Jinmei provided
       especially large amounts of text and / or detailed review.</t>
@@ -707,7 +707,7 @@
                     value="SATIN 2011"/>
       </reference>
 
-      <reference anchor="Unound-Configuration"
+      <reference anchor="Unbound-Configuration"
                  target="http://unbound.net/documentation/howto_turnoff_dnssec.html">
         <front>
           <title>Unbound: How to Turn Off DNSSEC</title>
@@ -789,7 +789,7 @@
         unbound.conf stay after restart.</t>
 
         <t>For additional information see <xref
-        target="Unound-Configuration"/></t>
+        target="Unbound-Configuration"/></t>
       </section>
 
       <section title="ISC BIND">
@@ -832,6 +832,12 @@
 
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
+
+      <t>-10 to 11<list style="symbols">
+          <t>Incoroprated comments from IETF LC, including:</t>
+
+          <t>A. Schulze - s/Unound/Unbound/</t>
+        </list></t>
 
       <t>-10 to 10.1<list style="symbols">
           <t>Fixed some typos (e.g Anrew -&gt; Andrew)</t>

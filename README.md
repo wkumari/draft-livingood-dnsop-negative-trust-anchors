@@ -610,8 +610,8 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
    Barnitz, Tom Creighton, Marco Davids, Brian Dickson, Patrik Falstrom,
    Tony Finch, Chris Ganster, Olafur Gudmundsson, Peter Hagopian, Wes
    Hardaker, Paul Hoffman, Shane Kerr, Murray Kucherawy, Rick Lamb, Marc
-   Lampo, Scott Rose, Ted Lemon, Antoin Verschuren, Paul Vixie, Patrik
-   Wallstrom, W.C.A.  Wijngaards, Nick Weaver
+   Lampo, Scott Rose, Ted Lemon, A.  Schulze, Antoin Verschuren, Paul
+   Vixie, Patrik Wallstrom, W.C.A.  Wijngaards, Nick Weaver
 
 
 
@@ -661,7 +661,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
               2011, <http://conferences.npl.co.uk/satin/presentations/
               satin2011slides-Weaver.pdf>.
 
-   [Unound-Configuration]
+   [Unbound-Configuration]
               Wijngaards, W., "Unbound: How to Turn Off DNSSEC", June
               2010, <http://unbound.net/documentation/
               howto_turnoff_dnssec.html>.
@@ -709,7 +709,7 @@ A.1.  NLNet Labs Unbound
    running server and are lost when the server is restarted.  Items from
    unbound.conf stay after restart.
 
-   For additional information see [Unound-Configuration]
+   For additional information see [Unbound-Configuration]
 
 A.2.  ISC BIND
 
@@ -766,6 +766,12 @@ Appendix B.  Document Change Log
 
    [RFC Editor: This section is to be removed before publication]
 
+   -10 to 11
+
+   o  Incoroprated comments from IETF LC, including:
+
+   o  A.  Schulze - s/Unound/Unbound/
+
    -10 to 10.1
 
    o  Fixed some typos (e.g Anrew -> Andrew)
@@ -775,18 +781,17 @@ Appendix B.  Document Change Log
    o  'Implementations MAY issue a warning or informational message when
       this occurs' - changed SHOULD to MAY, per Evan.
 
-   -08 to -09
-
-   o  Clarified that an NTA MUST take precedence over a positive, local
-      TA.
-
-
 
 
 Ebersman, et al.        Expires November 13, 2015              [Page 14]
 
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
+
+   -08 to -09
+
+   o  Clarified that an NTA MUST take precedence over a positive, local
+      TA.
 
    -07 to -08
 
@@ -830,12 +835,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
    -01 to -02:
 
-   o  Gah!  I forgot to run spell check.  And I type like a chimpanzee
-      with bad hand-eye coordination...
 
-   -00 to -01:
-
-   o  Stole chunks of text from Ed Lewis' mailing list "tirade" :-)
 
 
 
@@ -843,6 +843,13 @@ Ebersman, et al.        Expires November 13, 2015              [Page 15]
 
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
+
+   o  Gah!  I forgot to run spell check.  And I type like a chimpanzee
+      with bad hand-eye coordination...
+
+   -00 to -01:
+
+   o  Stole chunks of text from Ed Lewis' mailing list "tirade" :-)
 
    o  New rndc usage text from Evan.
 
@@ -884,13 +891,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
    Individual-05: Incorporated feedback from the DNSOP WG list received
    on 2/17/13 and 2/18/13.  This is likely the final version before the
-   IETF 86 draft cutoff date.  Updated references to RFC6781 to RFC6781,
-   per March Davids.
-
-   Individual-06: Added more OPEN issues to continue tracking WG
-   discussion.  No changes in the main document - just expanded issue
-   tracking.
-
 
 
 
@@ -899,6 +899,13 @@ Ebersman, et al.        Expires November 13, 2015              [Page 16]
 
 Internet-Draft        DNSSEC Negative Trust Anchors             May 2015
 
+
+   IETF 86 draft cutoff date.  Updated references to RFC6781 to RFC6781,
+   per March Davids.
+
+   Individual-06: Added more OPEN issues to continue tracking WG
+   discussion.  No changes in the main document - just expanded issue
+   tracking.
 
    Individual-07: Refresh document - needs revision and rework before
    IETF-91.  Planning to add more contributors.
@@ -938,13 +945,6 @@ Authors' Addresses
 
    Email: warren@kumari.net
    URI:   http://www.google.com
-
-
-
-
-
-
-
 
 
 
