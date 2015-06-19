@@ -215,7 +215,7 @@
       resolver or contact their ISP to complain, rather than seeing this as a
       failure on the part of the domain they wanted to reach. Without the
       techniques in this document, this pressure may cause the resolver
-      operator to disable (or simply not deploy) DNSSEC validation. </t>
+      operator to disable (or simply not deploy) DNSSEC validation.</t>
 
       <t>This document defines the Negative Trust Anchor (NTA), which can be
       used during the transition to ubiquitous DNSSEC deployment. NTAs are
@@ -272,7 +272,7 @@
         </section>
 
         <section anchor="End-User-Reaction"
-                 title="Improving End User Experiance" toc="include">
+                 title="Improving End User Experience" toc="include">
           <t>End users generally do not know of, understand, or care about the
           resolution process that causes connections to happen. This is by
           design: the point of the DNS is to insulate users from having to
@@ -376,7 +376,7 @@
       corrects the misconfiguration(s). It does not and should not involve
       turning off validation more broadly.</t>
 
-      <section title="Applicability of NTAs">
+      <section title="Applicability of Negative Trust Anchors">
         <t>A NTA MUST only be used for a limited duration. Implementors SHOULD
         allow the operator using the NTA to set an end time and date
         associated with any NTA. Optimally, this time and date is set in a DNS
@@ -419,7 +419,7 @@
       message when this occurs, so that operators are not surprised when this
       happens.</t>
 
-      <section title="Alerting Users to NTA Use">
+      <section title="Alerting Users to Negative Trust Anchor Use">
         <t>End users of a DNS recursive resolver or other people may wonder
         why a domain that fails DNSSEC validation resolves with a supposedly
         validating resolver. As a result, implementors should consider

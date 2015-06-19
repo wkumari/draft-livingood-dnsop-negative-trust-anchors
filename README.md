@@ -81,12 +81,12 @@ Table of Contents
      1.1.  Definition of a Negative Trust Anchor . . . . . . . . . .   3
      1.2.  Motivations for Negative Trust Anchors  . . . . . . . . .   4
        1.2.1.  Mitigating Domain Validation Failures . . . . . . . .   4
-       1.2.2.  Improving End User Experiance . . . . . . . . . . . .   4
+       1.2.2.  Improving End User Experience . . . . . . . . . . . .   4
        1.2.3.  Avoiding Switching to a Non-Validating Resolver . . .   5
    2.  Use of a Negative Trust Anchor  . . . . . . . . . . . . . . .   5
-     2.1.  Applicability of NTAs . . . . . . . . . . . . . . . . . .   6
+     2.1.  Applicability of Negative Trust Anchors . . . . . . . . .   6
    3.  Managing Negative Trust Anchors . . . . . . . . . . . . . . .   7
-     3.1.  Alerting Users to NTA Use . . . . . . . . . . . . . . . .   7
+     3.1.  Alerting Users to Negative Trust Anchor Use . . . . . . .   7
    4.  Removal of a Negative Trust Anchor  . . . . . . . . . . . . .   7
    5.  Comparison to Other DNS Misconfigurations . . . . . . . . . .   8
    6.  Intentionally Broken Domains  . . . . . . . . . . . . . . . .   8
@@ -194,7 +194,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    will validate the domain but other vendors' software may fail to
    validate the domain.
 
-1.2.2.  Improving End User Experiance
+1.2.2.  Improving End User Experience
 
    End users generally do not know of, understand, or care about the
    resolution process that causes connections to happen.  This is by
@@ -307,7 +307,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    the domain's administrator corrects the misconfiguration(s).  It does
    not and should not involve turning off validation more broadly.
 
-2.1.  Applicability of NTAs
+2.1.  Applicability of Negative Trust Anchors
 
    A NTA MUST only be used for a limited duration.  Implementors SHOULD
    allow the operator using the NTA to set an end time and date
@@ -359,7 +359,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    message when this occurs, so that operators are not surprised when
    this happens.
 
-3.1.  Alerting Users to NTA Use
+3.1.  Alerting Users to Negative Trust Anchor Use
 
    End users of a DNS recursive resolver or other people may wonder why
    a domain that fails DNSSEC validation resolves with a supposedly
