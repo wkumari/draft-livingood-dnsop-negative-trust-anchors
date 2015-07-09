@@ -149,6 +149,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    to keep DNSSEC validation enabled and still reach the misconfigured
    domain.
 
+   [ ED NOTE: Don't forget to insert 2119 boilerplate - not doing now,
+   to avoid messing up section numbers... ]
+
 1.1.  Definition of a Negative Trust Anchor
 
    Trust Anchors are defined in [RFC5914].  A trust anchor is used by a
@@ -161,9 +164,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    NTA can potentially be implemented at any level within the chain of
    trust and would stop validation from that point in the chain down.
    Validation starts again if there is a positive trust anchor further
-   down in the chain.  For example, if there is an NTA at example.com,
-   and a positive trust anchor at foo.bar.example.com, then validation
-   resumes for foo.bar.example.com and anything below it.
 
 
 
@@ -171,6 +171,10 @@ Ebersman, et al.        Expires December 16, 2015               [Page 3]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
+
+   down in the chain.  For example, if there is an NTA at example.com,
+   and a positive trust anchor at foo.bar.example.com, then validation
+   resumes for foo.bar.example.com and anything below it.
 
 1.2.  Motivations for Negative Trust Anchors
 
@@ -216,10 +220,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    As end users publicize these failures, others may recommend they
    switch from security-aware DNS resolvers to resolvers not performing
    DNSSEC validation.  This is a shame since the ISP or other DNS
-   recursive resolver operator is actually doing exactly what they are
-   supposed to do in failing to resolve a domain name; this is the
-   expected result when a domain can no longer be validated and it
-   protects end users from a potential security threat.  Use of an NTA
 
 
 
@@ -228,6 +228,10 @@ Ebersman, et al.        Expires December 16, 2015               [Page 4]
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
 
+   recursive resolver operator is actually doing exactly what they are
+   supposed to do in failing to resolve a domain name; this is the
+   expected result when a domain can no longer be validated and it
+   protects end users from a potential security threat.  Use of an NTA
    would allow the ISP to specifically remedy the failure to reach that
    domain, without compromising security for other sites.  This would
    result in a satisfied end user, with minimal impact to the ISP, while
@@ -272,10 +276,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    experience suggests that this is a very rare event, usually on the
    order of once per quarter (or even less).
 
-   It is important for the resolver operator to confirm that the domain
-   is still under the ownership / control of the legitimate owner of the
-   domain in order to ensure that disabling validation for a specific
-   domain does not direct users to an address under an attacker's
 
 
 
@@ -284,6 +284,10 @@ Ebersman, et al.        Expires December 16, 2015               [Page 5]
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
 
+   It is important for the resolver operator to confirm that the domain
+   is still under the ownership / control of the legitimate owner of the
+   domain in order to ensure that disabling validation for a specific
+   domain does not direct users to an address under an attacker's
    control.  Contacting the domain owner and telling them the DNSSEC
    records that the resolver operator is seeing allows the resolver
    operator to determine if the issue is a DNSSEC misconfiguration or an
@@ -331,10 +335,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
 
 
-
-
-
-
 Ebersman, et al.        Expires December 16, 2015               [Page 6]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
@@ -377,7 +377,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
    As explored in Section 10, using an NTA once the zone correctly
    validates can have security considerations.  It is therefore
-   RECOMMENDED that NTA implementors SHOULD periodically attempt to
+   RECOMMENDED that NTA implementors should periodically attempt to
    validate the domain in question, for the period of time that the NTA
    is in place, until such validation is again successful.  NTAs MUST
    expire automatically when their configured lifetime ends.  The
@@ -477,8 +477,8 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    want to inform the vendor where it fails so that the vendor can look
    more deeply into the issue.
 
-   The next thing is to figure out what the actual failure mode is.
-   There are several tools to do this, an incomplete list includes:
+   The next thing is to figure out what the actual failure mode is.  At
+   the time of this writing are several tools to do this, including:
 
    o  DNSViz (http://dnsviz.net)
 
@@ -489,7 +489,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
    most of these tools are open source and can be installed locally.
    However, using the tools over the Internet has the advantage of
-   providing visibility from a different point.
+   providing visibility from a different point.  This is an incomplete
+   list, and it is expected that additional tools will be developed over
+   time to aid in troubleshooting DNSSEC issues.
 
    Once you figure out what the error is, you need to check if it shows
    consistently around the world and from all authoritative servers.
@@ -497,8 +499,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    that is consistently the same is more likely to be operator caused
    than an attack.  Also if the output from the authoritative server is
    consistently different from the resolvers output this hints to an
-   attack rather then an error, unless there is EDNS0 client subnet
-   (draft-ietf-dnsop-edns-client-subnet) applied to the domain.
 
 
 
@@ -507,6 +507,9 @@ Ebersman, et al.        Expires December 16, 2015               [Page 9]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
+
+   attack rather then an error, unless there is EDNS0 client subnet
+   (draft-ietf-dnsop-edns-client-subnet) applied to the domain.
 
    A last check is to look at the actual DNS data.  Is the result of the
    query still the same or has it changed?  While a lot of DNSSEC errors
@@ -551,9 +554,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
          checking if another key in the DNSKEY RRSet is now used to sign
          the records.
 
-      *  Data in DS or DNSKEY doesn't match the other.  This is more
-         common in initial setup when there was a copy and paste error.
-         Again checking history on data is the best you can do there.
 
 
 
@@ -563,6 +563,10 @@ Ebersman, et al.        Expires December 16, 2015              [Page 10]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
+
+      *  Data in DS or DNSKEY doesn't match the other.  This is more
+         common in initial setup when there was a copy and paste error.
+         Again checking history on data is the best you can do there.
 
    All of the above is just a starting point for consideration when
    deciding whether or not to deploy a trust anchor.  It is not possible
@@ -608,10 +612,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    Tony Finch, Chris Ganster, Olafur Gudmundsson, Peter Hagopian,
    Christer Holmberg, Wes Hardaker, Paul Hoffman, Shane Kerr, Murray
    Kucherawy, Rick Lamb, Marc Lampo, Scott Rose, Ted Lemon, A.  Schulze,
-   Antoin Verschuren, Paul Vixie, Patrik Wallstrom, W.C.A.  Wijngaards,
-   Nick Weaver
-
-
 
 
 
@@ -619,6 +619,9 @@ Ebersman, et al.        Expires December 16, 2015              [Page 11]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
+
+   Antoin Verschuren, Paul Vixie, Patrik Wallstrom, W.C.A.  Wijngaards,
+   Nick Weaver
 
    Edward Lewis, Evan Hunt, Andrew Sullivan and Tatuya Jinmei provided
    especially large amounts of text and / or detailed review.
@@ -665,9 +668,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
               Wijngaards, W., "Unbound: How to Turn Off DNSSEC", June
               2010, <http://unbound.net/documentation/
               howto_turnoff_dnssec.html>.
-
-
-
 
 
 
@@ -766,6 +766,11 @@ Appendix B.  Document Change Log
 
    [RFC Editor: This section is to be removed before publication]
 
+   -10.4 to 10.5
+
+      Integrated some comments from Ben Campbell's No Objection IESG
+      review.
+
    -10.3 to 10.4
 
       s/personnel trained in the operation of DNS servers MUST confirm/
@@ -776,17 +781,17 @@ Appendix B.  Document Change Log
 
    o  Integrated comments from Gen-ART review - Christer Holmberg.
 
-   o  Offlist comment from Tony Finch.  Made the "Negative Trust Anchors
-      are intended to be temporary," sentence much better.
-
-   -10.1 to 10.2
-
 
 
 Ebersman, et al.        Expires December 16, 2015              [Page 14]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
+
+   o  Offlist comment from Tony Finch.  Made the "Negative Trust Anchors
+      are intended to be temporary," sentence much better.
+
+   -10.1 to 10.2
 
    o  Incoroprated comments from IETF LC, including:
 
@@ -831,11 +836,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
    o  Also clarified that if there is an NTA at foo.bar.baz.example, and
       a positive *trust anchor* at bar.baz.example, the most specific
-      wins.  I'm not very happy with this text, any additional text
-      gratefully accepted...
-
-   -03 to -04:
-
 
 
 
@@ -843,6 +843,11 @@ Ebersman, et al.        Expires December 16, 2015              [Page 15]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
+
+      wins.  I'm not very happy with this text, any additional text
+      gratefully accepted...
+
+   -03 to -04:
 
    o  Addressed some comment from an email from Jinmei that I had
       missed.  Turns out others had made many of the same comments, and
@@ -887,11 +892,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
    Individual-01: Fixed minor typos and grammatical nits.  Closed all
    open editorial items.
 
-   Individual-02: Simple date change to keep doc from expiring.
-   Substantive updates planned.
-
-   Individual-03: Changes to address feedback from Paul Vixie, by adding
-   a new section "Limited Time and Scope of Use".  Changes to address
 
 
 
@@ -900,6 +900,11 @@ Ebersman, et al.        Expires December 16, 2015              [Page 16]
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
 
+   Individual-02: Simple date change to keep doc from expiring.
+   Substantive updates planned.
+
+   Individual-03: Changes to address feedback from Paul Vixie, by adding
+   a new section "Limited Time and Scope of Use".  Changes to address
    issues raised by Antoin Verschuren and Patrik Wallstrom, by adding a
    new section "Intentionally Broken Domains" and added two related
    references.  Added text to address the need for manual investigation,
@@ -936,14 +941,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
 Authors' Addresses
 
-   Paul Ebersman
-   Comcast
-   One Comcast Center
-   1701 John F. Kennedy Boulevard
-   Philadelphia, PA  19103
-   US
 
-   Email: ebersman-ietf@dragon.net
+
+
 
 
 
@@ -954,6 +954,16 @@ Authors' Addresses
 Ebersman, et al.        Expires December 16, 2015              [Page 17]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
+
+
+   Paul Ebersman
+   Comcast
+   One Comcast Center
+   1701 John F. Kennedy Boulevard
+   Philadelphia, PA  19103
+   US
+
+   Email: ebersman-ietf@dragon.net
 
 
    Chris Griffiths
@@ -987,16 +997,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
    Email: Ralf.Weber@nominum.com
    URI:   http://www.nominum.com
-
-
-
-
-
-
-
-
-
-
 
 
 

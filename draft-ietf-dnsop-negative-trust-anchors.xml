@@ -232,6 +232,9 @@
       while also allowing the organization using the NTA to keep DNSSEC
       validation enabled and still reach the misconfigured domain.</t>
 
+      <t>[ ED NOTE: Don't forget to insert 2119 boilerplate - not doing now,
+      to avoid messing up section numbers... ]</t>
+
       <section anchor="Definition-of-a-Negative-Trust-Anchor"
                title="Definition of a Negative Trust Anchor" toc="include">
         <t>Trust Anchors are defined in <xref target="RFC5914"/>. A trust
@@ -439,7 +442,7 @@
              title="Removal of a Negative Trust Anchor" toc="include">
       <t>As explored in <xref target="Security-Considerations"/>, using an NTA
       once the zone correctly validates can have security considerations. It
-      is therefore RECOMMENDED that NTA implementors SHOULD periodically
+      is therefore RECOMMENDED that NTA implementors should periodically
       attempt to validate the domain in question, for the period of time that
       the NTA is in place, until such validation is again successful. NTAs
       MUST expire automatically when their configured lifetime ends. The
@@ -524,8 +527,8 @@
       want to inform the vendor where it fails so that the vendor can look
       more deeply into the issue.</t>
 
-      <t>The next thing is to figure out what the actual failure mode is.
-      There are several tools to do this, an incomplete list includes:<list
+      <t>The next thing is to figure out what the actual failure mode is. At
+      the time of this writing are several tools to do this, including:<list
           style="symbols">
           <t>DNSViz (http://dnsviz.net)</t>
 
@@ -538,7 +541,9 @@
 
       <t>most of these tools are open source and can be installed locally.
       However, using the tools over the Internet has the advantage of
-      providing visibility from a different point.</t>
+      providing visibility from a different point. This is an incomplete list,
+      and it is expected that additional tools will be developed over time to
+      aid in troubleshooting DNSSEC issues.</t>
 
       <t>Once you figure out what the error is, you need to check if it shows
       consistently around the world and from all authoritative servers. Use
@@ -834,6 +839,11 @@
 
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
+
+      <t>-10.4 to 10.5<list>
+          <t>Integrated some comments from Ben Campbell's No Objection IESG
+          review.</t>
+        </list></t>
 
       <t>-10.3 to 10.4<list>
           <t>s/personnel trained in the operation of DNS servers MUST
