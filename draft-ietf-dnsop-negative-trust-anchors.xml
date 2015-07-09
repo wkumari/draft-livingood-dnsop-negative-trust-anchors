@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-10.3"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-10.4"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -336,7 +336,7 @@
 
     <section anchor="Use-of-a-Negative-Trust-Anchor"
              title="Use of a Negative Trust Anchor" toc="include">
-      <t>Technical personnel trained in the operation of DNS servers MUST
+      <t>Technical personnel trained in the operation of DNS servers must
       confirm that a DNSSEC validation failure is due to misconfiguration, as
       a similar breakage could have occurred if an attacker gained access to a
       domain's authoritative servers and modified those records or had the
@@ -834,6 +834,12 @@
 
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
+
+      <t>-10.3 to 10.4<list>
+          <t>s/personnel trained in the operation of DNS servers MUST
+          confirm/personnel trained in the operation of DNS servers must
+          confirm/ - Alissa Cooper, </t>
+        </list></t>
 
       <t>-10.2 to 10.3<list style="symbols">
           <t>Integrated comments from Gen-ART review - Christer Holmberg.</t>

@@ -18,7 +18,7 @@ Expires: December 16, 2015
 
 
           Definition and Use of DNSSEC Negative Trust Anchors
-              draft-ietf-dnsop-negative-trust-anchors-10.3
+              draft-ietf-dnsop-negative-trust-anchors-10.4
 
 Abstract
 
@@ -259,7 +259,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
 2.  Use of a Negative Trust Anchor
 
-   Technical personnel trained in the operation of DNS servers MUST
+   Technical personnel trained in the operation of DNS servers must
    confirm that a DNSSEC validation failure is due to misconfiguration,
    as a similar breakage could have occurred if an attacker gained
    access to a domain's authoritative servers and modified those records
@@ -766,6 +766,12 @@ Appendix B.  Document Change Log
 
    [RFC Editor: This section is to be removed before publication]
 
+   -10.3 to 10.4
+
+      s/personnel trained in the operation of DNS servers MUST confirm/
+      personnel trained in the operation of DNS servers must confirm/ -
+      Alissa Cooper,
+
    -10.2 to 10.3
 
    o  Integrated comments from Gen-ART review - Christer Holmberg.
@@ -775,18 +781,16 @@ Appendix B.  Document Change Log
 
    -10.1 to 10.2
 
-   o  Incoroprated comments from IETF LC, including:
-
-   o  A.  Schulze - s/Unound/Unbound/
-
-
-
 
 
 Ebersman, et al.        Expires December 16, 2015              [Page 14]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
+
+   o  Incoroprated comments from IETF LC, including:
+
+   o  A.  Schulze - s/Unound/Unbound/
 
    o  Joe Abley: Tone in into jarring.  S1.2 s/domain administrator/zone
       administrator/, dnscheck -> zonemaster
@@ -832,10 +836,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
    -03 to -04:
 
-   o  Addressed some comment from an email from Jinmei that I had
-      missed.  Turns out others had made many of the same comments, and
-      so most had already been addressed.
-
 
 
 
@@ -843,6 +843,10 @@ Ebersman, et al.        Expires December 16, 2015              [Page 15]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
+
+   o  Addressed some comment from an email from Jinmei that I had
+      missed.  Turns out others had made many of the same comments, and
+      so most had already been addressed.
 
    -02 to -03:
 
@@ -888,10 +892,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
    Individual-03: Changes to address feedback from Paul Vixie, by adding
    a new section "Limited Time and Scope of Use".  Changes to address
-   issues raised by Antoin Verschuren and Patrik Wallstrom, by adding a
-   new section "Intentionally Broken Domains" and added two related
-   references.  Added text to address the need for manual investigation,
-   as suggested by Patrik Falstrom.  Added a suggestion on notification
 
 
 
@@ -900,6 +900,10 @@ Ebersman, et al.        Expires December 16, 2015              [Page 16]
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
 
+   issues raised by Antoin Verschuren and Patrik Wallstrom, by adding a
+   new section "Intentionally Broken Domains" and added two related
+   references.  Added text to address the need for manual investigation,
+   as suggested by Patrik Falstrom.  Added a suggestion on notification
    as suggested by Marc Lampo.  Made several additions and changes
    suggested by Ralf Weber, Wes Hardaker, Nick Weaver, Tony Finch, Shane
    Kerr, Joe Abley, Murray Kucherawy, Olafur Gudmundsson.
@@ -942,10 +946,6 @@ Authors' Addresses
    Email: ebersman-ietf@dragon.net
 
 
-   Chris Griffiths
-
-   Email: cgriffiths@gmail.com
-
 
 
 
@@ -954,6 +954,11 @@ Authors' Addresses
 Ebersman, et al.        Expires December 16, 2015              [Page 17]
 
 Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
+
+
+   Chris Griffiths
+
+   Email: cgriffiths@gmail.com
 
 
    Warren Kumari
@@ -982,11 +987,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors            June 2015
 
    Email: Ralf.Weber@nominum.com
    URI:   http://www.nominum.com
-
-
-
-
-
 
 
 
