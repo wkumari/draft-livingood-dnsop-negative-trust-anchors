@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-10.4"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-11"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -149,7 +149,7 @@
       <!-- author role='editor' is an optional value here -->
     </author>
 
-    <date day="14" month="June" year="2015"/>
+    <date day="14" month="July" year="2015"/>
 
     <!-- META-DATA DECLARATIONS -->
 
@@ -446,10 +446,15 @@
       attempt to validate the domain in question, for the period of time that
       the NTA is in place, until such validation is again successful. NTAs
       MUST expire automatically when their configured lifetime ends. The
-      lifetime MUST NOT exceed a week. Before removing the NTA, all
-      authoritative resolvers listed in the zone should be checked (due to
-      anycast and load balancers it may not be possible to check all
-      instances).</t>
+      lifetime SHOULD NOT exceed a week. There is limited experience with what
+      this value should be, but at least one large vendor has documented
+      customer feedback suggesting that a week is reasonable based on
+      expectations of how long failures take to fix or to be forgotten.
+      Operational experience may further refine these expectations.</t>
+
+      <t>Before removing the NTA, all authoritative resolvers listed in the
+      zone should be checked (due to anycast and load balancers it may not be
+      possible to check all instances).</t>
 
       <t>Once all testing succeeds, an NTA should be removed as soon as is
       reasonably possible. One possible method to automatically determine when
@@ -652,7 +657,8 @@
       Chris Ganster, Olafur Gudmundsson, Peter Hagopian, Christer Holmberg,
       Wes Hardaker, Paul Hoffman, Shane Kerr, Murray Kucherawy, Rick Lamb,
       Marc Lampo, Scott Rose, Ted Lemon, A. Schulze, Antoin Verschuren, Paul
-      Vixie, Patrik Wallstrom, W.C.A. Wijngaards, Nick Weaver</t>
+      Vixie, Patrik Wallstrom, Nick Weaver, W.C.A. Wijngaards, Suzanne
+      Woolf.</t>
 
       <t>Edward Lewis, Evan Hunt, Andrew Sullivan and Tatuya Jinmei provided
       especially large amounts of text and / or detailed review.</t>
@@ -840,6 +846,11 @@
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
 
+      <t>-10.5 to 11<list>
+          <t>Integrated Alissa Cooper's No Objection comments. Text from Suz
+          and Evan.</t>
+        </list></t>
+
       <t>-10.4 to 10.5<list>
           <t>Integrated some comments from Ben Campbell's No Objection IESG
           review.</t>
@@ -848,7 +859,7 @@
       <t>-10.3 to 10.4<list>
           <t>s/personnel trained in the operation of DNS servers MUST
           confirm/personnel trained in the operation of DNS servers must
-          confirm/ - Alissa Cooper, </t>
+          confirm/ - Alissa Cooper,</t>
         </list></t>
 
       <t>-10.2 to 10.3<list style="symbols">
