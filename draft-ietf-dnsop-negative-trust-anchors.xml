@@ -524,7 +524,7 @@
       or have a database that stores DNS names associated answers (this is
       often referred to as a "passive DNS database"). Another invaluable tool
       is dnsviz (http://www.dnsivz.net) which also stores DNSSEC related data
-      historically. The drawback here is that you need to have it test the
+      historically. The drawback here is that you need for it to have tested the
       domain before the incident occurs.</t>
 
       <t>The first and easiest thing to check is if the failure of the domain
