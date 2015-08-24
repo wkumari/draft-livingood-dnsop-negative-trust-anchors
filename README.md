@@ -18,7 +18,7 @@ Expires: February 25, 2016                                        Google
 
 
           Definition and Use of DNSSEC Negative Trust Anchors
-               draft-ietf-dnsop-negative-trust-anchors-12
+               draft-ietf-dnsop-negative-trust-anchors-13
 
 Abstract
 
@@ -622,9 +622,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
    Tony Finch, Chris Ganster, Olafur Gudmundsson, Peter Hagopian,
    Christer Holmberg, Wes Hardaker, Paul Hoffman, Shane Kerr, Murray
-   Kucherawy, Rick Lamb, Marc Lampo, Scott Rose, Ted Lemon, A.  Schulze,
-   Antoin Verschuren, Paul Vixie, Patrik Wallstrom, Nick Weaver, W.C.A.
-   Wijngaards, Suzanne Woolf.
+   Kucherawy, Rick Lamb, Marc Lampo, Scott Rose, Ted Lemon, Wendy
+   Seltzer, A.  Schulze, Antoin Verschuren, Paul Vixie, Patrik
+   Wallstrom, Nick Weaver, W.C.A.  Wijngaards, Suzanne Woolf.
 
    Edward Lewis, Evan Hunt, Andrew Sullivan and Tatuya Jinmei provided
    especially large amounts of text and / or detailed review.
@@ -770,16 +770,16 @@ Appendix B.  Document Change Log
 
    [RFC Editor: This section is to be removed before publication]
 
-   -11 to -12"
+   -12 to -13:
+
+   o  ... and add Chris' email address.
+
+   o  Finally incorporate Wendy Seltzer's pull request with tenst fixup
+      nits.
+
+   -11 to -12:
 
    o  Simply updated Chris' affiliation.
-
-   -10.5 to 11
-
-      Integrated Alissa Cooper's No Objection comments.  Text from Suz
-      and Evan.
-
-   -10.4 to 10.5
 
 
 
@@ -787,6 +787,13 @@ Ebersman, et al.        Expires February 25, 2016              [Page 14]
 
 Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
+
+   -10.5 to 11
+
+      Integrated Alissa Cooper's No Objection comments.  Text from Suz
+      and Evan.
+
+   -10.4 to 10.5
 
       Integrated some comments from Ben Campbell's No Objection IESG
       review.
@@ -829,13 +836,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
    -07 to -08
 
-   o  Added some cleanup from Paul Hoffman and Evan Hunt.
-
-   o  Some better text on how to make Unbound do this, provided by
-      W.C.A.  Wijngaards.
-
-   -06 to -07
-
 
 
 
@@ -843,6 +843,13 @@ Ebersman, et al.        Expires February 25, 2016              [Page 15]
 
 Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
+
+   o  Added some cleanup from Paul Hoffman and Evan Hunt.
+
+   o  Some better text on how to make Unbound do this, provided by
+      W.C.A.  Wijngaards.
+
+   -06 to -07
 
    o  Addressed a large number of comments from Paul Hoffman, Scott Rose
       and some more from Jinmei.
@@ -886,19 +893,18 @@ Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
    o  New rndc usage text from Evan.
 
-   o  Deleted the (already resolved) open issues from Appendix C, moved
-      the unresolved issues into github, resolved them!
-
-   o  Clarification that automated removal is best removal method, and
-      how to implement (Evan Hunt)
-
-
 
 
 Ebersman, et al.        Expires February 25, 2016              [Page 16]
 
 Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
+
+   o  Deleted the (already resolved) open issues from Appendix C, moved
+      the unresolved issues into github, resolved them!
+
+   o  Clarification that automated removal is best removal method, and
+      how to implement (Evan Hunt)
 
    o  Clarify that an NTA is not a RR (Rick Lamb)
 
@@ -942,12 +948,6 @@ Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
    Individual-07: Refresh document - needs revision and rework before
    IETF-91.  Planning to add more contributors.
 
-   o  Using github issue tracker - go see https://github.com/wkumari/
-      draft-livingood-dnsop-negative-trust-anchors for more details.
-
-   o  A bunch of readability improvments.
-
-
 
 
 
@@ -955,6 +955,11 @@ Ebersman, et al.        Expires February 25, 2016              [Page 17]
 
 Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
+
+   o  Using github issue tracker - go see https://github.com/wkumari/
+      draft-livingood-dnsop-negative-trust-anchors for more details.
+
+   o  A bunch of readability improvments.
 
    o  Issue: Notify the domain owner of the validation failure -
       resolved.
@@ -991,7 +996,20 @@ Authors' Addresses
    Oxford  OX4 4DQ
    United Kingdom
 
+   Email: cgriffiths@gmail.com
    URI:   http://www.nominet.org.uk/
+
+
+
+
+
+
+
+
+
+Ebersman, et al.        Expires February 25, 2016              [Page 18]
+
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
    Jason Livingood
@@ -1005,29 +1023,11 @@ Authors' Addresses
    URI:   http://www.comcast.com
 
 
-
-
-Ebersman, et al.        Expires February 25, 2016              [Page 18]
-
-Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
-
-
    Ralf Weber
    Nominum
 
    Email: Ralf.Weber@nominum.com
    URI:   http://www.nominum.com
-
-
-
-
-
-
-
-
-
-
-
 
 
 

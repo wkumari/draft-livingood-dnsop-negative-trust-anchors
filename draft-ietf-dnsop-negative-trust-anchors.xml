@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-12"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-13"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -117,7 +117,7 @@
           <country>United Kingdom</country>
         </postal>
 
-        <email/>
+        <email>cgriffiths@gmail.com</email>
 
         <uri>http://www.nominet.org.uk/</uri>
       </address>
@@ -538,8 +538,8 @@
       or have a database that stores DNS names associated answers (this is
       often referred to as a "passive DNS database"). Another invaluable tool
       is dnsviz (http://www.dnsivz.net) which also stores DNSSEC related data
-      historically. The drawback here is that you need for it to have tested the
-      domain before the incident occurs.</t>
+      historically. The drawback here is that you need for it to have tested
+      the domain before the incident occurs.</t>
 
       <t>The first and easiest thing to check is if the failure of the domain
       is consistent across different software implementations. If not, you
@@ -670,9 +670,9 @@
       Creighton, Marco Davids, Brian Dickson, Patrik Falstrom, Tony Finch,
       Chris Ganster, Olafur Gudmundsson, Peter Hagopian, Christer Holmberg,
       Wes Hardaker, Paul Hoffman, Shane Kerr, Murray Kucherawy, Rick Lamb,
-      Marc Lampo, Scott Rose, Ted Lemon, A. Schulze, Antoin Verschuren, Paul
-      Vixie, Patrik Wallstrom, Nick Weaver, W.C.A. Wijngaards, Suzanne
-      Woolf.</t>
+      Marc Lampo, Scott Rose, Ted Lemon, Wendy Seltzer, A. Schulze, Antoin
+      Verschuren, Paul Vixie, Patrik Wallstrom, Nick Weaver, W.C.A.
+      Wijngaards, Suzanne Woolf.</t>
 
       <t>Edward Lewis, Evan Hunt, Andrew Sullivan and Tatuya Jinmei provided
       especially large amounts of text and / or detailed review.</t>
@@ -860,7 +860,14 @@
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
 
-      <t>-11 to -12"<list style="symbols">
+      <t>-12 to -13:<list style="symbols">
+          <t>... and add Chris' email address.</t>
+
+          <t>Finally incorporate Wendy Seltzer's pull request with tenst fixup
+          nits.</t>
+        </list></t>
+
+      <t>-11 to -12:<list style="symbols">
           <t>Simply updated Chris' affiliation.</t>
         </list></t>
 
