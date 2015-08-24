@@ -475,7 +475,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
    (this is often referred to as a "passive DNS database").  Another
    invaluable tool is dnsviz (http://www.dnsivz.net) which also stores
    DNSSEC related data historically.  The drawback here is that you need
-   to have it test the domain before the incident occurs.
+   for it to have tested the domain before the incident occurs.
 
    The first and easiest thing to check is if the failure of the domain
    is consistent across different software implementations.  If not, you
@@ -511,7 +511,7 @@ Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
    Use DNS Tools (dig) or DNS looking glasses to verify this.  An error
    that is consistently the same is more likely to be operator caused
    than an attack.  Also if the output from the authoritative server is
-   consistently different from the resolvers output this hints to an
+   consistently different from the resolvers' output this hints to an
    attack rather then an error, unless there is EDNS0 client subnet
    (draft-ietf-dnsop-edns-client-subnet) applied to the domain.
 
@@ -541,8 +541,8 @@ Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
    o  DNSKEYs in child zone don't match the DS record in the parent
       zone.  There is a big variation of this that can happen at any
-      point in the key lifecycle.  DNSViz is the best tools to show
-      problems in the chain.  If you debug yourself use dig +multiline
+      point in the key lifecycle.  DNSViz is the best tool to show
+      problems in the chain.  If you debug yourself, use dig +multiline
       so that you can see the key id of a DNSKEY.  Common Variations of
       this can be:
 
