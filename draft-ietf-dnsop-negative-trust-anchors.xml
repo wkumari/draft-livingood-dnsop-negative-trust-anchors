@@ -34,7 +34,7 @@
 <!-- keep one blank line between list items -->
 <?rfc subcompact='no' ?>
 <!-- END REFERENCE PROCESSING -->
-<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-11"
+<rfc category="info" docName="draft-ietf-dnsop-negative-trust-anchors-12"
      ipr="trust200902">
   <!-- category values: std, bcp, info, exp, and historic
      ipr values: full3978, noModification3978, noDerivatives3978
@@ -75,18 +75,6 @@
       <!-- author role='editor' is an optional value here-->
     </author>
 
-    <author fullname="Chris Griffiths" initials="C." surname="Griffiths">
-      <address>
-        <postal>
-          <street/>
-        </postal>
-
-        <email>cgriffiths@gmail.com</email>
-      </address>
-
-      <!-- author role='editor' is an optional value here -->
-    </author>
-
     <author fullname="Warren Kumari" initials="W." surname="Kumari">
       <organization abbrev="Google">Google</organization>
 
@@ -106,6 +94,32 @@
         <email>warren@kumari.net</email>
 
         <uri>http://www.google.com</uri>
+      </address>
+
+      <!-- author role='editor' is an optional value here -->
+    </author>
+
+    <author fullname="Chris Griffiths" initials="C." surname="Griffiths">
+      <organization abbrev="Nominet">Nominet</organization>
+
+      <address>
+        <postal>
+          <street>Minerva House</street>
+
+          <street>Edmund Halley Road</street>
+
+          <street>Oxford Science Park</street>
+
+          <city>Oxford</city>
+
+          <code>OX4 4DQ</code>
+
+          <country>United Kingdom</country>
+        </postal>
+
+        <email/>
+
+        <uri>http://www.nominet.org.uk/</uri>
       </address>
 
       <!-- author role='editor' is an optional value here -->
@@ -149,7 +163,7 @@
       <!-- author role='editor' is an optional value here -->
     </author>
 
-    <date day="14" month="July" year="2015"/>
+    <date day="24" month="August" year="2015"/>
 
     <!-- META-DATA DECLARATIONS -->
 
@@ -845,6 +859,10 @@
 
     <section title="Document Change Log">
       <t>[RFC Editor: This section is to be removed before publication]</t>
+
+      <t>-11 to -12"<list style="symbols">
+          <t>Simply updated Chris' affiliation.</t>
+        </list></t>
 
       <t>-10.5 to 11<list>
           <t>Integrated Alissa Cooper's No Objection comments. Text from Suz

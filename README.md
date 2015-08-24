@@ -6,19 +6,19 @@
 
 Domain Name System Operations                                P. Ebersman
 Internet-Draft                                                   Comcast
-Intended status: Informational                              C. Griffiths
-Expires: January 15, 2016
-                                                               W. Kumari
-                                                                  Google
+Intended status: Informational                                 W. Kumari
+Expires: February 25, 2016                                        Google
+                                                            C. Griffiths
+                                                                 Nominet
                                                             J. Livingood
                                                                  Comcast
                                                                 R. Weber
                                                                  Nominum
-                                                           July 14, 2015
+                                                         August 24, 2015
 
 
           Definition and Use of DNSSEC Negative Trust Anchors
-               draft-ietf-dnsop-negative-trust-anchors-11
+               draft-ietf-dnsop-negative-trust-anchors-12
 
 Abstract
 
@@ -50,14 +50,14 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 15, 2016.
+   This Internet-Draft will expire on February 25, 2016.
 
 
 
 
-Ebersman, et al.        Expires January 15, 2016                [Page 1]
+Ebersman, et al.        Expires February 25, 2016               [Page 1]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
 Copyright Notice
@@ -100,7 +100,7 @@ Table of Contents
      12.2.  Informative References . . . . . . . . . . . . . . . . .  12
    Appendix A.  Configuration Examples . . . . . . . . . . . . . . .  13
      A.1.  NLNet Labs Unbound  . . . . . . . . . . . . . . . . . . .  13
-     A.2.  ISC BIND  . . . . . . . . . . . . . . . . . . . . . . . .  13
+     A.2.  ISC BIND  . . . . . . . . . . . . . . . . . . . . . . . .  14
      A.3.  Nominum Vantio  . . . . . . . . . . . . . . . . . . . . .  14
    Appendix B.  Document Change Log  . . . . . . . . . . . . . . . .  14
    Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
@@ -111,9 +111,9 @@ Table of Contents
 
 
 
-Ebersman, et al.        Expires January 15, 2016                [Page 2]
+Ebersman, et al.        Expires February 25, 2016               [Page 2]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
 1.  Introduction and motivation
@@ -167,9 +167,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
 
 
-Ebersman, et al.        Expires January 15, 2016                [Page 3]
+Ebersman, et al.        Expires February 25, 2016               [Page 3]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
    down in the chain.  For example, if there is an NTA at example.com,
@@ -223,9 +223,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
 
 
-Ebersman, et al.        Expires January 15, 2016                [Page 4]
+Ebersman, et al.        Expires February 25, 2016               [Page 4]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
    recursive resolver operator is actually doing exactly what they are
@@ -279,9 +279,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
 
 
-Ebersman, et al.        Expires January 15, 2016                [Page 5]
+Ebersman, et al.        Expires February 25, 2016               [Page 5]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
    It is important for the resolver operator to confirm that the domain
@@ -335,9 +335,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
 
 
-Ebersman, et al.        Expires January 15, 2016                [Page 6]
+Ebersman, et al.        Expires February 25, 2016               [Page 6]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
 3.  Managing Negative Trust Anchors
@@ -391,9 +391,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
 
 
-Ebersman, et al.        Expires January 15, 2016                [Page 7]
+Ebersman, et al.        Expires February 25, 2016               [Page 7]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
    Before removing the NTA, all authoritative resolvers listed in the
@@ -447,9 +447,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
 
 
-Ebersman, et al.        Expires January 15, 2016                [Page 8]
+Ebersman, et al.        Expires February 25, 2016               [Page 8]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
    Organizations that utilize NTAs should not add an NTA for any
@@ -503,9 +503,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
 
 
-Ebersman, et al.        Expires January 15, 2016                [Page 9]
+Ebersman, et al.        Expires February 25, 2016               [Page 9]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
    Use DNS Tools (dig) or DNS looking glasses to verify this.  An error
@@ -559,9 +559,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
 
 
-Ebersman, et al.        Expires January 15, 2016               [Page 10]
+Ebersman, et al.        Expires February 25, 2016              [Page 10]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
          checking if another key in the DNSKEY RRSet is now used to sign
@@ -615,9 +615,9 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
 
 
-Ebersman, et al.        Expires January 15, 2016               [Page 11]
+Ebersman, et al.        Expires February 25, 2016              [Page 11]
 
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
    Tony Finch, Chris Ganster, Olafur Gudmundsson, Peter Hagopian,
@@ -635,14 +635,17 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
    [RFC4033]  Arends, R., Austein, R., Larson, M., Massey, D., and S.
               Rose, "DNS Security Introduction and Requirements", RFC
-              4033, March 2005.
+              4033, DOI 10.17487/RFC4033, March 2005,
+              <http://www.rfc-editor.org/info/rfc4033>.
 
    [RFC5914]  Housley, R., Ashmore, S., and C. Wallace, "Trust Anchor
-              Format", RFC 5914, June 2010.
+              Format", RFC 5914, DOI 10.17487/RFC5914, June 2010,
+              <http://www.rfc-editor.org/info/rfc5914>.
 
    [RFC6781]  Kolkman, O., Mekking, W., and R. Gieben, "DNSSEC
-              Operational Practices, Version 2", RFC 6781, December
-              2012.
+              Operational Practices, Version 2", RFC 6781, DOI 10.17487/
+              RFC6781, December 2012,
+              <http://www.rfc-editor.org/info/rfc6781>.
 
 12.2.  Informative References
 
@@ -660,21 +663,25 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
               validator?", July 2012, <http://jpmens.net/2012/07/30/
               is-my-web-site-being-used-via-dnssec-validator/>.
 
+
+
+
+
+
+
+
+
+Ebersman, et al.        Expires February 25, 2016              [Page 12]
+
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
+
+
    [Netalyzr]
               Weaver, N., Kreibich, C., Nechaev, B., and V. Paxson,
               "Implications of Netalyzr's DNS Measurements", Securing
               and Trusting Internet Names, SATIN 2011 SATIN 2011, April
               2011, <http://conferences.npl.co.uk/satin/presentations/
               satin2011slides-Weaver.pdf>.
-
-
-
-
-
-Ebersman, et al.        Expires January 15, 2016               [Page 12]
-
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
-
 
    [Unbound-Configuration]
               Wijngaards, W., "Unbound: How to Turn Off DNSSEC", June
@@ -716,21 +723,18 @@ A.1.  NLNet Labs Unbound
 
    For additional information see [Unbound-Configuration]
 
+
+
+
+
+Ebersman, et al.        Expires February 25, 2016              [Page 13]
+
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
+
+
 A.2.  ISC BIND
 
    Use the "rndc" command:
-
-
-
-
-
-
-
-
-Ebersman, et al.        Expires January 15, 2016               [Page 13]
-
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
-
 
      nta -dump
                List all negative trust anchors.
@@ -766,6 +770,10 @@ Appendix B.  Document Change Log
 
    [RFC Editor: This section is to be removed before publication]
 
+   -11 to -12"
+
+   o  Simply updated Chris' affiliation.
+
    -10.5 to 11
 
       Integrated Alissa Cooper's No Objection comments.  Text from Suz
@@ -773,20 +781,17 @@ Appendix B.  Document Change Log
 
    -10.4 to 10.5
 
+
+
+Ebersman, et al.        Expires February 25, 2016              [Page 14]
+
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
+
+
       Integrated some comments from Ben Campbell's No Objection IESG
       review.
 
    -10.3 to 10.4
-
-
-
-
-
-
-Ebersman, et al.        Expires January 15, 2016               [Page 14]
-
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
-
 
       s/personnel trained in the operation of DNS servers MUST confirm/
       personnel trained in the operation of DNS servers must confirm/ -
@@ -831,18 +836,18 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
    -06 to -07
 
+
+
+
+Ebersman, et al.        Expires February 25, 2016              [Page 15]
+
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
+
+
    o  Addressed a large number of comments from Paul Hoffman, Scott Rose
       and some more from Jinmei.
 
    -05 to -06
-
-
-
-
-Ebersman, et al.        Expires January 15, 2016               [Page 15]
-
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
-
 
    o  A bunch of comments from Tony Finch.
 
@@ -887,18 +892,19 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
    o  Clarification that automated removal is best removal method, and
       how to implement (Evan Hunt)
 
+
+
+
+Ebersman, et al.        Expires February 25, 2016              [Page 16]
+
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
+
+
    o  Clarify that an NTA is not a RR (Rick Lamb)
 
    o  Grammar fixes.
 
    Ind-07 - WG-00:
-
-
-
-Ebersman, et al.        Expires January 15, 2016               [Page 16]
-
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
-
 
    o  Simply updated name to reflect WG doc.
 
@@ -941,20 +947,19 @@ Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
 
    o  A bunch of readability improvments.
 
+
+
+
+
+Ebersman, et al.        Expires February 25, 2016              [Page 17]
+
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
+
+
    o  Issue: Notify the domain owner of the validation failure -
       resolved.
 
    o  Issue: Make the NTA as specific as possible - resolved.
-
-
-
-
-
-
-Ebersman, et al.        Expires January 15, 2016               [Page 17]
-
-Internet-Draft        DNSSEC Negative Trust Anchors            July 2015
-
 
 Authors' Addresses
 
@@ -968,11 +973,6 @@ Authors' Addresses
    Email: ebersman-ietf@dragon.net
 
 
-   Chris Griffiths
-
-   Email: cgriffiths@gmail.com
-
-
    Warren Kumari
    Google
    1600 Amphitheatre Parkway
@@ -981,6 +981,17 @@ Authors' Addresses
 
    Email: warren@kumari.net
    URI:   http://www.google.com
+
+
+   Chris Griffiths
+   Nominet
+   Minerva House
+   Edmund Halley Road
+   Oxford Science Park
+   Oxford  OX4 4DQ
+   United Kingdom
+
+   URI:   http://www.nominet.org.uk/
 
 
    Jason Livingood
@@ -992,6 +1003,13 @@ Authors' Addresses
 
    Email: jason_livingood@cable.comcast.com
    URI:   http://www.comcast.com
+
+
+
+
+Ebersman, et al.        Expires February 25, 2016              [Page 18]
+
+Internet-Draft        DNSSEC Negative Trust Anchors          August 2015
 
 
    Ralf Weber
@@ -1007,5 +1025,43 @@ Authors' Addresses
 
 
 
-Ebersman, et al.        Expires January 15, 2016               [Page 18]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Ebersman, et al.        Expires February 25, 2016              [Page 19]
 ```
